@@ -29,9 +29,13 @@ module.exports = React.createClass({
 
             <Layout {...this.props}>
             <div id='login'>
-              <LoginButton  />
+              <div id="login-buttons" className="col-md-3">
+                <LoginButton  />
+                <LoginButton  />
+                <LoginButton  />
+                <LoginButton  />
+              </div>
             </div>
-            <a href='/server'>Click to go to a non-react-router rendered view</a>
         </Layout>
         );
     }

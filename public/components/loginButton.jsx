@@ -9,12 +9,10 @@ module.exports = React.createClass({
 
   render: function render(){
     return(
-      <div>
         <a className="btn btn-block btn-social btn-twitter">
             <span className="fa fa-twitter"></span>
                 Sign in with Twitter
         </a>
-      </div>
     )
   }
 });
