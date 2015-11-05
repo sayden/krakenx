@@ -41,4 +41,5 @@ dist/
 .idea
 
 # Bower and Browerify
-.build/
+.build
+public/bundle.js

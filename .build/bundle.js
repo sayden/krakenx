@@ -22963,6 +22963,23 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":73}],201:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+module.exports = React.createClass({displayName: "exports",
+  render: function render(){
+    return(
+        React.createElement("a", {href: this.props.destination, className: "btn btn-block btn-social btn-google"}, 
+            React.createElement("span", {className: "fa fa-google"}), 
+            this.props.message
+        )
+    )
+  }
+});
+
+
+},{"react":200}],202:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23003,7 +23020,7 @@ document.addEventListener('DOMContentLoaded', function onLoad() {
 });
 
 
-},{"../routes/react.jsx":207,"./views/account.jsx":202,"./views/app.jsx":203,"./views/layout.jsx":204,"./views/login.jsx":205,"./views/server.jsx":206,"react-engine/lib/client":2}],202:[function(require,module,exports){
+},{"../routes/react.jsx":208,"./views/account.jsx":203,"./views/app.jsx":204,"./views/layout.jsx":205,"./views/login.jsx":206,"./views/server.jsx":207,"react-engine/lib/client":2}],203:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
 |  Copyright (C) 2015 PayPal                                                                                          |
 |                                                                                                                     |
@@ -23040,7 +23057,7 @@ module.exports = React.createClass({
 });
 
 
-},{"react":200}],203:[function(require,module,exports){
+},{"react":200}],204:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
 |  Copyright (C) 2015 PayPal                                                                                          |
 |                                                                                                                     |
@@ -23075,7 +23092,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"./layout.jsx":204,"react":200,"react-router":28}],204:[function(require,module,exports){
+},{"./layout.jsx":205,"react":200,"react-router":28}],205:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23122,7 +23139,7 @@ React.createElement("script", {src: "/bundle.js"})
 });
 
 
-},{"react":200}],205:[function(require,module,exports){
+},{"react":200}],206:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23142,6 +23159,7 @@ React.createElement("script", {src: "/bundle.js"})
 
 var Layout = require('./layout.jsx');
 var React = require('react');
+var GoogleButton = require('../components/GoogleButton.jsx');
 
 module.exports = React.createClass({
 
@@ -23153,21 +23171,15 @@ module.exports = React.createClass({
 
             React.createElement(Layout, React.__spread({},  this.props), 
             React.createElement("div", {id: "login"}, 
-
-            React.createElement("a", {className: "btn btn-block btn-social btn-twitter"}, 
-                React.createElement("span", {className: "fa fa-twitter"}), 
-                    "Sign in with Twitter"
+                React.createElement("div", {className: "col-md-2"}, React.createElement(GoogleButton, {destination: "/auth/google", message: "Google"}))
             )
-
-            ), 
-        React.createElement("a", {href: "/server"}, "Click to go to a non-react-router rendered view")
         )
         );
     }
 });
 
 
-},{"./layout.jsx":204,"react":200}],206:[function(require,module,exports){
+},{"../components/GoogleButton.jsx":201,"./layout.jsx":205,"react":200}],207:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23210,7 +23222,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"./layout.jsx":204,"react":200}],207:[function(require,module,exports){
+},{"./layout.jsx":205,"react":200}],208:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23240,4 +23252,4 @@ var routes = module.exports = (
     )
 );
 
-},{"../public/views/account.jsx":202,"../public/views/app.jsx":203,"react":200,"react-router":28}]},{},[201]);
+},{"../public/views/account.jsx":203,"../public/views/app.jsx":204,"react":200,"react-router":28}]},{},[202]);
