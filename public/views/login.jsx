@@ -15,30 +15,28 @@
 
 'use strict';
 
+var Layout = require('./layout.jsx');
 var React = require('react');
 
 module.exports = React.createClass({
 
+    displayName: 'login',
+
     render: function render() {
 
         return (
-            <html>
-                <head>
-                    <meta charSet='utf-8' />
-                    <title>
-            {this.props.title}
-                    </title>
-<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css"/>
-<link rel="stylesheet" href="components/bootstrap-social/bootstrap-social.css"/>
-<link rel="stylesheet" href="components/font-awesome/css/font-awesome.css"/>
-                </head>
-                <body>
-{this.props.children}
-</body>
-<script src="/components/jquery/dist/jquery.min.js"></script>
-<script src="/components/bootstrap/dist/js/bootstrap.js"></script>
-<script src='/bundle.js'></script>
-            </html>
+
+            <Layout {...this.props}>
+            <div id='login'>
+
+            <a className="btn btn-block btn-social btn-twitter">
+                <span className="fa fa-twitter"></span>
+                    Sign in with Twitter
+            </a>
+
+            </div>
+        <a href='/server'>Click to go to a non-react-router rendered view</a>
+        </Layout>
         );
     }
 });

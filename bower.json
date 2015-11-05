@@ -1,0 +1,25 @@
+{
+  "name": "krakenx",
+  "description": "A krakenjs based app with JSX templating and React with NoSQL persistence",
+  "main": "index.js",
+  "authors": [
+    "Mario Castro"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sayden/krakenx",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-social": "~4.10.1",
+    "bootstrap": "~3.3.5"
+  }
+}

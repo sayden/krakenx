@@ -30,4 +30,8 @@ module.exports = function (router) {
         res.render('server', model);
     });
 
+    router.get('/login', function(req, res){
+        res.render('login', model);
+    });
+
 };

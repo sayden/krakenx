@@ -22986,7 +22986,7 @@ var Client = require('react-engine/lib/client');
 // Include all view files. Browerify doesn't do
 // this automatically as it can only operate on
 // static require statements.
-require('./views/account.jsx');require('./views/app.jsx');require('./views/layout.jsx');require('./views/server.jsx');
+require('./views/account.jsx');require('./views/app.jsx');require('./views/layout.jsx');require('./views/login.jsx');require('./views/server.jsx');
 
 // boot options
 var options = {
@@ -23003,7 +23003,7 @@ document.addEventListener('DOMContentLoaded', function onLoad() {
 });
 
 
-},{"../routes/react.jsx":206,"./views/account.jsx":202,"./views/app.jsx":203,"./views/layout.jsx":204,"./views/server.jsx":205,"react-engine/lib/client":2}],202:[function(require,module,exports){
+},{"../routes/react.jsx":207,"./views/account.jsx":202,"./views/app.jsx":203,"./views/layout.jsx":204,"./views/login.jsx":205,"./views/server.jsx":206,"react-engine/lib/client":2}],202:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
 |  Copyright (C) 2015 PayPal                                                                                          |
 |                                                                                                                     |
@@ -23105,12 +23105,17 @@ module.exports = React.createClass({displayName: "exports",
                     React.createElement("meta", {charSet: "utf-8"}), 
                     React.createElement("title", null, 
             this.props.title
-                    )
+                    ), 
+React.createElement("link", {rel: "stylesheet", href: "components/bootstrap/dist/css/bootstrap.css"}), 
+React.createElement("link", {rel: "stylesheet", href: "components/bootstrap-social/bootstrap-social.css"}), 
+React.createElement("link", {rel: "stylesheet", href: "components/font-awesome/css/font-awesome.css"})
                 ), 
                 React.createElement("body", null, 
-          this.props.children
-                ), 
-                React.createElement("script", {src: "/bundle.js"})
+this.props.children
+), 
+React.createElement("script", {src: "/components/jquery/dist/jquery.min.js"}), 
+React.createElement("script", {src: "/components/bootstrap/dist/js/bootstrap.js"}), 
+React.createElement("script", {src: "/bundle.js"})
             )
         );
     }
@@ -23118,6 +23123,51 @@ module.exports = React.createClass({displayName: "exports",
 
 
 },{"react":200}],205:[function(require,module,exports){
+/*-------------------------------------------------------------------------------------------------------------------*\
+ |  Copyright (C) 2015 PayPal                                                                                          |
+ |                                                                                                                     |
+ |  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance     |
+ |  with the License.                                                                                                  |
+ |                                                                                                                     |
+ |  You may obtain a copy of the License at                                                                            |
+ |                                                                                                                     |
+ |       http://www.apache.org/licenses/LICENSE-2.0                                                                    |
+ |                                                                                                                     |
+ |  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed   |
+ |  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for  |
+ |  the specific language governing permissions and limitations under the License.                                     |
+ \*-------------------------------------------------------------------------------------------------------------------*/
+
+'use strict';
+
+var Layout = require('./layout.jsx');
+var React = require('react');
+
+module.exports = React.createClass({
+
+    displayName: 'login',
+
+    render: function render() {
+
+        return (
+
+            React.createElement(Layout, React.__spread({},  this.props), 
+            React.createElement("div", {id: "login"}, 
+
+            React.createElement("a", {className: "btn btn-block btn-social btn-twitter"}, 
+                React.createElement("span", {className: "fa fa-twitter"}), 
+                    "Sign in with Twitter"
+            )
+
+            ), 
+        React.createElement("a", {href: "/server"}, "Click to go to a non-react-router rendered view")
+        )
+        );
+    }
+});
+
+
+},{"./layout.jsx":204,"react":200}],206:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23160,7 +23210,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"./layout.jsx":204,"react":200}],206:[function(require,module,exports){
+},{"./layout.jsx":204,"react":200}],207:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |

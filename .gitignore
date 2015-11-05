@@ -39,3 +39,6 @@ dist/
 
 # Intellij
 .idea
+
+# Bower and Browerify
+.build/
