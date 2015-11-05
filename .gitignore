@@ -39,3 +39,7 @@ dist/
 
 # Intellij
 .idea
+
+# Bower and Browerify
+.build
+public/bundle.js

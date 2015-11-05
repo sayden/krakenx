@@ -22963,6 +22963,23 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":73}],201:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+module.exports = React.createClass({displayName: "exports",
+  render: function render(){
+    return(
+        React.createElement("a", {href: this.props.destination, className: "btn btn-block btn-social btn-google"}, 
+            React.createElement("span", {className: "fa fa-google"}), 
+            this.props.message
+        )
+    )
+  }
+});
+
+
+},{"react":200}],202:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -22986,7 +23003,7 @@ var Client = require('react-engine/lib/client');
 // Include all view files. Browerify doesn't do
 // this automatically as it can only operate on
 // static require statements.
-require('./views/account.jsx');require('./views/app.jsx');require('./views/layout.jsx');require('./views/server.jsx');
+require('./views/account.jsx');require('./views/app.jsx');require('./views/layout.jsx');require('./views/login.jsx');require('./views/server.jsx');
 
 // boot options
 var options = {
@@ -23003,7 +23020,7 @@ document.addEventListener('DOMContentLoaded', function onLoad() {
 });
 
 
-},{"../routes/react.jsx":206,"./views/account.jsx":202,"./views/app.jsx":203,"./views/layout.jsx":204,"./views/server.jsx":205,"react-engine/lib/client":2}],202:[function(require,module,exports){
+},{"../routes/react.jsx":208,"./views/account.jsx":203,"./views/app.jsx":204,"./views/layout.jsx":205,"./views/login.jsx":206,"./views/server.jsx":207,"react-engine/lib/client":2}],203:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
 |  Copyright (C) 2015 PayPal                                                                                          |
 |                                                                                                                     |
@@ -23040,7 +23057,7 @@ module.exports = React.createClass({
 });
 
 
-},{"react":200}],203:[function(require,module,exports){
+},{"react":200}],204:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
 |  Copyright (C) 2015 PayPal                                                                                          |
 |                                                                                                                     |
@@ -23075,7 +23092,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"./layout.jsx":204,"react":200,"react-router":28}],204:[function(require,module,exports){
+},{"./layout.jsx":205,"react":200,"react-router":28}],205:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23105,19 +23122,64 @@ module.exports = React.createClass({displayName: "exports",
                     React.createElement("meta", {charSet: "utf-8"}), 
                     React.createElement("title", null, 
             this.props.title
-                    )
+                    ), 
+React.createElement("link", {rel: "stylesheet", href: "components/bootstrap/dist/css/bootstrap.css"}), 
+React.createElement("link", {rel: "stylesheet", href: "components/bootstrap-social/bootstrap-social.css"}), 
+React.createElement("link", {rel: "stylesheet", href: "components/font-awesome/css/font-awesome.css"})
                 ), 
                 React.createElement("body", null, 
-          this.props.children
-                ), 
-                React.createElement("script", {src: "/bundle.js"})
+this.props.children
+), 
+React.createElement("script", {src: "/components/jquery/dist/jquery.min.js"}), 
+React.createElement("script", {src: "/components/bootstrap/dist/js/bootstrap.js"}), 
+React.createElement("script", {src: "/bundle.js"})
             )
         );
     }
 });
 
 
-},{"react":200}],205:[function(require,module,exports){
+},{"react":200}],206:[function(require,module,exports){
+/*-------------------------------------------------------------------------------------------------------------------*\
+ |  Copyright (C) 2015 PayPal                                                                                          |
+ |                                                                                                                     |
+ |  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance     |
+ |  with the License.                                                                                                  |
+ |                                                                                                                     |
+ |  You may obtain a copy of the License at                                                                            |
+ |                                                                                                                     |
+ |       http://www.apache.org/licenses/LICENSE-2.0                                                                    |
+ |                                                                                                                     |
+ |  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed   |
+ |  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for  |
+ |  the specific language governing permissions and limitations under the License.                                     |
+ \*-------------------------------------------------------------------------------------------------------------------*/
+
+'use strict';
+
+var Layout = require('./layout.jsx');
+var React = require('react');
+var GoogleButton = require('../components/GoogleButton.jsx');
+
+module.exports = React.createClass({
+
+    displayName: 'login',
+
+    render: function render() {
+
+        return (
+
+            React.createElement(Layout, React.__spread({},  this.props), 
+            React.createElement("div", {id: "login"}, 
+                React.createElement("div", {className: "col-md-2"}, React.createElement(GoogleButton, {destination: "/auth/google", message: "Google"}))
+            )
+        )
+        );
+    }
+});
+
+
+},{"../components/GoogleButton.jsx":201,"./layout.jsx":205,"react":200}],207:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23160,7 +23222,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"./layout.jsx":204,"react":200}],206:[function(require,module,exports){
+},{"./layout.jsx":205,"react":200}],208:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23190,4 +23252,4 @@ var routes = module.exports = (
     )
 );
 
-},{"../public/views/account.jsx":202,"../public/views/app.jsx":203,"react":200,"react-router":28}]},{},[201]);
+},{"../public/views/account.jsx":203,"../public/views/app.jsx":204,"react":200,"react-router":28}]},{},[202]);
