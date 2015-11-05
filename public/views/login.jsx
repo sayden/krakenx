@@ -17,7 +17,7 @@
 
 var Layout = require('./layout.jsx');
 var React = require('react');
-var LoginButton = require('../components/loginButton.jsx');
+var GoogleButton = require('../components/GoogleButton.jsx');
 
 module.exports = React.createClass({
 
@@ -29,12 +29,7 @@ module.exports = React.createClass({
 
             <Layout {...this.props}>
             <div id='login'>
-              <div id="login-buttons" className="col-md-3">
-                <LoginButton  />
-                <LoginButton  />
-                <LoginButton  />
-                <LoginButton  />
-              </div>
+                <div className="col-md-2"><GoogleButton destination="/auth/google" message="Google" /></div>
             </div>
         </Layout>
         );
