@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "browserify": "browserify -t reactify -t require-globify public/index.js -o public/bundle.js"
+    "browserify": "browserify -t reactify -t require-globify public/index.js -o public/bundle.js",
+    "install-all":"npm install; bower install"
   },
   "dependencies": {
     "engine-munger": "^0.2.0",

@@ -17,6 +17,7 @@
 
 var Layout = require('./layout.jsx');
 var React = require('react');
+var LoginButton = require('../components/loginButton.jsx');
 
 module.exports = React.createClass({
 
@@ -28,14 +29,9 @@ module.exports = React.createClass({
 
             <Layout {...this.props}>
             <div id='login'>
-
-            <a className="btn btn-block btn-social btn-twitter">
-                <span className="fa fa-twitter"></span>
-                    Sign in with Twitter
-            </a>
-
+              <LoginButton  />
             </div>
-        <a href='/server'>Click to go to a non-react-router rendered view</a>
+            <a href='/server'>Click to go to a non-react-router rendered view</a>
         </Layout>
         );
     }
