@@ -43,10 +43,22 @@ nodeJSX.install({
     extension: '.jsx'
 });
 
+// Setup Mongo
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+
 app = module.exports = express();
+
+app.on('middleware:after:session', function configPassport(eventargs) {
+  //Setup passport
+  var passport = require('passport');
+  var googleSetup = require('./config/credentials/google')(passport);
+  app.use(passport.initialize());
+  app.use(passport.session());
+});
+
 app.use(kraken(options));
-app.use(passport.initialize());
-app.use(passport.session());
+
 app.on('start', function () {
     console.log('Application ready to serve requests.');
     console.log('Environment: %s', app.kraken.get('env:env'));

@@ -19,10 +19,10 @@ var React = require('react');
 var Router = require('react-router');
 
 var App = require('../public/views/app.jsx');
-var Account = require('../public/views/account.jsx');
+var Home = require('../public/views/home.jsx');
 
 var routes = module.exports = (
     <Router.Route path='/' handler={App}>
-        <Router.DefaultRoute name='account' handler={Account} />
+        <Router.DefaultRoute name='home' handler={Home} />
     </Router.Route>
 );

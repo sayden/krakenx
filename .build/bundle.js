@@ -23003,7 +23003,7 @@ var Client = require('react-engine/lib/client');
 // Include all view files. Browerify doesn't do
 // this automatically as it can only operate on
 // static require statements.
-require('./views/account.jsx');require('./views/app.jsx');require('./views/layout.jsx');require('./views/login.jsx');require('./views/server.jsx');
+require('./views/account.jsx');require('./views/app.jsx');require('./views/home.jsx');require('./views/layout.jsx');require('./views/login.jsx');require('./views/server.jsx');require('./views/user.jsx');
 
 // boot options
 var options = {
@@ -23020,7 +23020,7 @@ document.addEventListener('DOMContentLoaded', function onLoad() {
 });
 
 
-},{"../routes/react.jsx":208,"./views/account.jsx":203,"./views/app.jsx":204,"./views/layout.jsx":205,"./views/login.jsx":206,"./views/server.jsx":207,"react-engine/lib/client":2}],203:[function(require,module,exports){
+},{"../routes/react.jsx":210,"./views/account.jsx":203,"./views/app.jsx":204,"./views/home.jsx":205,"./views/layout.jsx":206,"./views/login.jsx":207,"./views/server.jsx":208,"./views/user.jsx":209,"react-engine/lib/client":2}],203:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
 |  Copyright (C) 2015 PayPal                                                                                          |
 |                                                                                                                     |
@@ -23092,7 +23092,27 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"./layout.jsx":205,"react":200,"react-router":28}],205:[function(require,module,exports){
+},{"./layout.jsx":206,"react":200,"react-router":28}],205:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Layout = require('./layout.jsx');
+
+module.exports = React.createClass({displayName: "exports",
+  render: function render(){
+    return (
+      React.createElement(Layout, React.__spread({},  this.props), 
+        React.createElement("div", null, 
+          React.createElement("h1", null, "This is the public home view"), 
+          React.createElement("p", null, React.createElement("a", {href: "/login"}, "Login")), 
+          React.createElement("p", null, React.createElement("a", {href: "/home"}, "User Home"))
+        )
+      )
+    )
+  }
+});
+
+},{"./layout.jsx":206,"react":200}],206:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23123,9 +23143,9 @@ module.exports = React.createClass({displayName: "exports",
                     React.createElement("title", null, 
             this.props.title
                     ), 
-React.createElement("link", {rel: "stylesheet", href: "components/bootstrap/dist/css/bootstrap.css"}), 
-React.createElement("link", {rel: "stylesheet", href: "components/bootstrap-social/bootstrap-social.css"}), 
-React.createElement("link", {rel: "stylesheet", href: "components/font-awesome/css/font-awesome.css"})
+React.createElement("link", {rel: "stylesheet", href: "/components/bootstrap/dist/css/bootstrap.css"}), 
+React.createElement("link", {rel: "stylesheet", href: "/components/bootstrap-social/bootstrap-social.css"}), 
+React.createElement("link", {rel: "stylesheet", href: "/components/font-awesome/css/font-awesome.css"})
                 ), 
                 React.createElement("body", null, 
 this.props.children
@@ -23139,7 +23159,7 @@ React.createElement("script", {src: "/bundle.js"})
 });
 
 
-},{"react":200}],206:[function(require,module,exports){
+},{"react":200}],207:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23179,7 +23199,7 @@ module.exports = React.createClass({
 });
 
 
-},{"../components/GoogleButton.jsx":201,"./layout.jsx":205,"react":200}],207:[function(require,module,exports){
+},{"../components/GoogleButton.jsx":201,"./layout.jsx":206,"react":200}],208:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23222,7 +23242,23 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"./layout.jsx":205,"react":200}],208:[function(require,module,exports){
+},{"./layout.jsx":206,"react":200}],209:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Layout = require('./layout.jsx');
+
+module.exports = React.createClass({displayName: "exports",
+  render: function render(){
+    return (
+      React.createElement(Layout, React.__spread({},  this.props), 
+        React.createElement("h1", null, "This is the private home view")
+      )
+    )
+  }
+});
+
+},{"./layout.jsx":206,"react":200}],210:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -23245,11 +23281,12 @@ var Router = require('react-router');
 
 var App = require('../public/views/app.jsx');
 var Account = require('../public/views/account.jsx');
+var Home = require('../public/views/home.jsx');
 
 var routes = module.exports = (
     React.createElement(Router.Route, {path: "/", handler: App}, 
-        React.createElement(Router.DefaultRoute, {name: "account", handler: Account})
+        React.createElement(Router.DefaultRoute, {name: "home", handler: Home})
     )
 );
 
-},{"../public/views/account.jsx":203,"../public/views/app.jsx":204,"react":200,"react-router":28}]},{},[202]);
+},{"../public/views/account.jsx":203,"../public/views/app.jsx":204,"../public/views/home.jsx":205,"react":200,"react-router":28}]},{},[202]);

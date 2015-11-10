@@ -28,9 +28,9 @@ module.exports = React.createClass({
                     <title>
             {this.props.title}
                     </title>
-<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css"/>
-<link rel="stylesheet" href="components/bootstrap-social/bootstrap-social.css"/>
-<link rel="stylesheet" href="components/font-awesome/css/font-awesome.css"/>
+<link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.css"/>
+<link rel="stylesheet" href="/components/bootstrap-social/bootstrap-social.css"/>
+<link rel="stylesheet" href="/components/font-awesome/css/font-awesome.css"/>
                 </head>
                 <body>
 {this.props.children}

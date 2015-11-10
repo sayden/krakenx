@@ -15,60 +15,22 @@
 
 'use strict';
 
-var IndexModel = require('../models/index'),
-  passport = require('passport');
-
+var UserModel = require('../models/user');
+var routeAuthStrategy = require('../routes/strategies/auth');
 
 module.exports = function (router) {
 
-    var model = new IndexModel();
+  var model = new UserModel();
 
-    router.get('/', function (req, res) {
-        res.render(req.url, model);
-    });
-
-    router.get('/server', function(req, res) {
-        res.render('server', model);
-    });
-
-    router.get('/login', function(req, res){
-        res.render('login', model);
-    });
-
-
-  // route for logging out
-  router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+  routeAuthStrategy('/', router, function(req, res){
+    res.render('user', model);
   });
 
+  router.get('/', function (req, res) {
+    res.render('user', model);
+  });
 
-  // =====================================
-  // GOOGLE ROUTES =======================
-  // =====================================
-  // send to google to do the authentication
-  // profile gets us their basic information including their name
-  // email gets their emails
-  router.get('/auth/google',
-    passport.authenticate('google', {
-      scope : ['profile', 'email']
-    }));
-
-  // the callback after google has authenticated the user
-  router.get('/auth/google/callback',
-    passport.authenticate('google', {
-      successRedirect : '/user/#',
-      failureRedirect : '/login'
-    }));
+  router.get('/me', function(req, res){
+    res.json({ id: req.user.id, username: req.user.username });
+  });
 };
-
-//// route middleware to make sure a user is logged in
-//function isLoggedIn(req, res, next) {
-//
-//  // if user is authenticated in the session, carry on
-//  if (req.isAuthenticated())
-//    return next();
-//
-//  // if they aren't redirect them to the home page
-//  res.redirect('/');
-//}

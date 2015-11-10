@@ -21,13 +21,6 @@ var http = require('http');
 
 var server;
 
-// Setup Mongo
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-
-//Setup passport
-var passport = require('passport');
-var googleSetup = require('./config/credentials/google')(passport);
 
 /*
  * Create and start HTTP server.

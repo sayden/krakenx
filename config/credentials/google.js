@@ -1,5 +1,4 @@
-var passport = require('passport')
-  , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
   User = require('../../models/UserSchema'),
   googleConfigAuth = require('./config');
 
@@ -27,17 +26,18 @@ module.exports = function(passport) {
   // =========================================================================
   passport.use(new GoogleStrategy({
 
-      clientID        : googleConfigAuth.google.clientId,
-      clientSecret    : googleConfigAuth.google.clientSecret,
-      callbackURL     : googleConfigAuth.google.callbackURL,
-      returnURL       : "/"
+      clientID            : googleConfigAuth.google.clientId,
+      clientSecret        : googleConfigAuth.google.clientSecret,
+      callbackURL         : googleConfigAuth.google.callbackURL,
+      returnURL           : "/",
+      passReqToCallback   : true
 
     },
-    function(token, refreshToken, profile, done) {
+    function(req, accessToken, refreshToken, profile, done) {
       // Set the provider data and include tokens
       var providerData = profile._json;
-      //providerData.accessToken = accessToken;
-      //providerData.refreshToken = refreshToken;
+      providerData.accessToken = accessToken;
+      providerData.refreshToken = refreshToken;
 
       // Create the user OAuth profile
       var providerUserProfile = {
@@ -53,58 +53,88 @@ module.exports = function(passport) {
       };
 
       // Save the user OAuth profile
-      saveGoogleOauth(User, providerUserProfile, done);
+      saveGoogleOauth(req, providerUserProfile, done);
 
     }));
 
 };
 
-function saveGoogleOauth(User, providerUserProfile, done) {
-  // Define a search query fields
-  var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-  var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+function saveGoogleOauth(req, providerUserProfile, done) {
+  if (!req.user) {
+    console.log('User req null');
+    // Define a search query fields
+    var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
+    var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
 
-  // Define main provider search query
-  var mainProviderSearchQuery = {};
-  mainProviderSearchQuery.provider = providerUserProfile.provider;
-  mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+    // Define main provider search query
+    var mainProviderSearchQuery = {};
+    mainProviderSearchQuery.provider = providerUserProfile.provider;
+    mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
-  // Define additional provider search query
-  var additionalProviderSearchQuery = {};
-  additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+    // Define additional provider search query
+    var additionalProviderSearchQuery = {};
+    additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
-  // Define a search query to find existing user with current provider profile
-  var searchQuery = {
-    $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
-  };
+    // Define a search query to find existing user with current provider profile
+    var searchQuery = {
+      $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
+    };
 
-  User.findOne(searchQuery, function (err, user) {
-    if (err) {
-      return done(err);
-    } else {
-      if (!user) {
-        var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
-
-        User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
-          user = new User({
-            firstName: providerUserProfile.firstName,
-            lastName: providerUserProfile.lastName,
-            username: availableUsername,
-            displayName: providerUserProfile.displayName,
-            email: providerUserProfile.email,
-            profileImageURL: providerUserProfile.profileImageURL,
-            provider: providerUserProfile.provider,
-            providerData: providerUserProfile.providerData
-          });
-
-          // And save the user
-          user.save(function (err) {
-            return done(err, user);
-          });
-        });
+    User.findOne(searchQuery, function (err, user) {
+      if (err) {
+        console.log("Error trying to find user");
+        return done(err);
       } else {
-        return done(err, user);
+        if (!user) {
+          var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+
+          User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
+            user = new User({
+              firstName: providerUserProfile.firstName,
+              lastName: providerUserProfile.lastName,
+              username: availableUsername,
+              displayName: providerUserProfile.displayName,
+              email: providerUserProfile.email,
+              profileImageURL: providerUserProfile.profileImageURL,
+              provider: providerUserProfile.provider,
+              providerData: providerUserProfile.providerData
+            });
+
+            // And save the user
+            user.save(function (err) {
+              console.log("User saved");
+              return done(err, user);
+            });
+          });
+        } else {
+          console.log("User found");
+          return done(err, user);
+        }
       }
+    });
+  } else {
+    console.log('User req not null');
+    // User is already logged in, join the provider data to the existing user
+    var user = req.user;
+
+    // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
+    if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
+      // Add the provider data to the additional provider data field
+      if (!user.additionalProvidersData) {
+        user.additionalProvidersData = {};
+      }
+
+      user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+
+      // Then tell mongoose that we've updated the additionalProvidersData field
+      user.markModified('additionalProvidersData');
+
+      // And save the user
+      user.save(function (err) {
+        return done(err, user, '/settings/accounts');
+      });
+    } else {
+      return done(new Error('User is already connected using this provider'), user);
     }
-  });
+  }
 }
