@@ -19,6 +19,7 @@ var express = require('express');
 var kraken = require('kraken-js');
 var nodeJSX = require('node-jsx');
 var passport = require('passport');
+var flash = require('connect-flash');
 
 var options, app;
 
@@ -55,6 +56,7 @@ app.on('middleware:after:session', function configPassport(eventargs) {
   var googleSetup = require('./config/credentials/google')(passport);
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(flash())
 });
 
 app.use(kraken(options));

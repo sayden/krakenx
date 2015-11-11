@@ -12939,7 +12939,7 @@ module.exports = ReactDefaultPerf;
 
 var assign = require("./Object.assign");
 
-// Don't try to save users less than 1.2ms (a number I made up)
+// Don't try to save user less than 1.2ms (a number I made up)
 var DONT_CARE_THRESHOLD = 1.2;
 var DOM_OPERATION_TYPES = {
   '_mountImageIntoNode': 'set innerHTML',
@@ -19587,9 +19587,9 @@ var KeyboardEventInterface = {
     // `keyCode` is the result of a KeyDown/Up event and represents the value of
     // physical keyboard key.
 
-    // The actual meaning of the value depends on the users' keyboard layout
+    // The actual meaning of the value depends on the user' keyboard layout
     // which cannot be detected. Assuming that it is a US keyboard layout
-    // provides a surprisingly accurate mapping for US and European users.
+    // provides a surprisingly accurate mapping for US and European user.
     // Due to this, it is left to the user to implement at this time.
     if (event.type === 'keydown' || event.type === 'keyup') {
       return event.keyCode;

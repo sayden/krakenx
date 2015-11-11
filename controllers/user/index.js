@@ -15,22 +15,21 @@
 
 'use strict';
 
-var UserModel = require('../models/user');
-var routeAuthStrategy = require('../routes/strategies/auth');
+var UserModel = require('../../models/user');
+var auth = require('../../routes/strategies/auth');
+var passport = require('passport');
+var UserSchema = require('../../models/UserSchema');
+
 
 module.exports = function (router) {
 
   var model = new UserModel();
 
-  routeAuthStrategy('/', router, function(req, res){
+  router.get('/', auth.isAuthenticated(), function(req, res){
     res.render('user', model);
   });
 
-  router.get('/', function (req, res) {
-    res.render('user', model);
-  });
-
-  router.get('/me', function(req, res){
+  router.get('/me', auth.isAuthenticated(), function(req, res){
     res.json({ id: req.user.id, username: req.user.username });
   });
 };

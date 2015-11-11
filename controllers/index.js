@@ -32,15 +32,16 @@ module.exports = function (router) {
     });
 
     router.get('/login', function(req, res){
-        res.render('login', model);
+      //Include any error messages that come from the login process.
+      model.messages = req.flash('error');
+      res.render('login', model);
     });
 
-
-  // route for logging out
-  router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
+    // route for logging out
+    router.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+    });
 
 
   // =====================================
