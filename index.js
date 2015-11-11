@@ -54,6 +54,7 @@ app.on('middleware:after:session', function configPassport(eventargs) {
   //Setup passport
   var passport = require('passport');
   var googleSetup = require('./config/credentials/google')(passport);
+  var facebookSetup = require('./config/credentials/facebook')(passport);
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash())
