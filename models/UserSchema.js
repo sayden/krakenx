@@ -1,3 +1,4 @@
+'use strict';
 
 /**
  * Module dependencies.
@@ -7,8 +8,7 @@ var mongoose = require('mongoose'),
   crypto = require('crypto'),
   validator = require('validator'),
   generatePassword = require('generate-password'),
-  owasp = require('owasp-password-strength-test'),
-  auth = require('../routes/strategies/auth').routes;
+  owasp = require('owasp-password-strength-test');
 
 /**
  * A Validation function for local strategy properties
@@ -203,16 +203,16 @@ UserSchema.statics.generateRandomPassphrase = function () {
   });
 };
 
-UserSchema.statics.isLoggedIn = isLoggedIn;
-UserSchema.statics.injectUser = injectUser;
-
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
+  if (req.isAuthenticated()){
     return next();
+  }
 
   res.redirect('/');
 }
+
+
 
 /**
  * A helper method to add the user to the response context so we don't have to manually do it.
@@ -230,6 +230,8 @@ function injectUser() {
   };
 }
 
+UserSchema.statics.isLoggedIn = isLoggedIn;
+UserSchema.statics.injectUser = injectUser;
 
 var User = mongoose.model('User', UserSchema);
 
@@ -241,19 +243,28 @@ module.exports = User;
 module.exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
     // Define a search query fields
-    var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-    var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+    var searchMainProviderIdentifierField = 'providerData.' +
+      providerUserProfile.providerIdentifierField;
+    var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' +
+      providerUserProfile.provider + '.' +
+      providerUserProfile.providerIdentifierField;
 
     // Define main provider search query
     var mainProviderSearchQuery = {};
     mainProviderSearchQuery.provider = providerUserProfile.provider;
-    mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+    mainProviderSearchQuery[searchMainProviderIdentifierField] =
+      providerUserProfile.providerData[
+        providerUserProfile.providerIdentifierField
+      ];
 
     // Define additional provider search query
     var additionalProviderSearchQuery = {};
-    additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+    additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] =
+      providerUserProfile.providerData[
+        providerUserProfile.providerIdentifierField
+      ];
 
-    // Define a search query to find existing user with current provider profile
+    //Define a search query to find existing user with current provider profile
     var searchQuery = {
       $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
     };
@@ -263,24 +274,27 @@ module.exports.saveOAuthUserProfile = function (req, providerUserProfile, done) 
         return done(err);
       } else {
         if (!user) {
-          var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+          var possibleUsername = providerUserProfile.username ||
+            ((providerUserProfile.email) ?
+              providerUserProfile.email.split('@')[0] : '');
 
-          User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
-            user = new User({
-              firstName: providerUserProfile.firstName,
-              lastName: providerUserProfile.lastName,
-              username: availableUsername,
-              displayName: providerUserProfile.displayName,
-              email: providerUserProfile.email,
-              profileImageURL: providerUserProfile.profileImageURL,
-              provider: providerUserProfile.provider,
-              providerData: providerUserProfile.providerData
-            });
+          User.findUniqueUsername(possibleUsername, null,
+            function (availableUsername) {
+              user = new User({
+                firstName: providerUserProfile.firstName,
+                lastName: providerUserProfile.lastName,
+                username: availableUsername,
+                displayName: providerUserProfile.displayName,
+                email: providerUserProfile.email,
+                profileImageURL: providerUserProfile.profileImageURL,
+                provider: providerUserProfile.provider,
+                providerData: providerUserProfile.providerData
+              });
 
-            // And save the user
-            user.save(function (err) {
-              return done(err, user);
-            });
+              // And save the user
+              user.save(function (err) {
+                return done(err, user);
+              });
           });
         } else {
           return done(err, user);
@@ -291,8 +305,11 @@ module.exports.saveOAuthUserProfile = function (req, providerUserProfile, done) 
     // User is already logged in, join the provider data to the existing user
     var user = req.user;
 
-    // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
-    if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
+    // Check if user exists, is not signed in using this provider, and doesn't
+    // have that provider data already configured
+    if (user.provider !== providerUserProfile.provider &&
+      (!user.additionalProvidersData ||
+      !user.additionalProvidersData[providerUserProfile.provider])) {
       // Add the provider data to the additional provider data field
       if (!user.additionalProvidersData) {
         user.additionalProvidersData = {};

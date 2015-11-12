@@ -17,8 +17,6 @@
 
 var UserModel = require('../../models/user');
 var auth = require('../../routes/strategies/auth');
-var passport = require('passport');
-var UserSchema = require('../../models/UserSchema');
 
 
 module.exports = function (router) {
