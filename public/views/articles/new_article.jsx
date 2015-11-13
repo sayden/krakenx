@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var Layout = require('./layout.jsx');
+var Layout = require('../layout.jsx');
 
 module.exports = React.createClass({
   render: function render(){
@@ -19,6 +19,10 @@ module.exports = React.createClass({
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
+        <div className="col-md-12">
+          <h4>Links</h4>
+          <a href="/article">Article home</a>
+        </div>
       </Layout>
     )
   }

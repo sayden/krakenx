@@ -1,6 +1,6 @@
 'use strict';
 
-var ArticleModel = require('../../models/article');
+var ArticleModel = require('./models/article');
 var auth = require('../../routes/strategies/auth');
 
 

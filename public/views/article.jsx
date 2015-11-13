@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Layout = require('./layout.jsx');
-var ListItem = require('../components/article/ListItem.jsx');
+var ListItem = require('./articles/components/ListItem.jsx');
 
 module.exports = React.createClass({
   render: function render(){

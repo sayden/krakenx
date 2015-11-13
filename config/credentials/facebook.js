@@ -1,7 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy,
-  User = require('../../models/UserSchema'),
-  config = require('./config'),
-  user = require('../../models/UserSchema');
+  User = require('../../controllers/user/models/UserSchema'),
+  config = require('./config');
 
 module.exports = function(passport) {
 

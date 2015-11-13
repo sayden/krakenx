@@ -15,7 +15,7 @@
 
 'use strict';
 
-var UserModel = require('../../models/user');
+var UserModel = require('./models/user');
 var auth = require('../../routes/strategies/auth');
 
 
