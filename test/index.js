@@ -19,21 +19,21 @@
 
 
 var kraken = require('kraken-js'),
-    express = require('express'),
+    app = require('../index'),
     request = require('supertest');
 
 
 describe('/', function () {
 
-    var app, mock;
+    var mock;
 
 
     beforeEach(function (done) {
-        app = express();
-        app.on('start', done);
-        app.use(kraken({
-            basedir: process.cwd()
-        }));
+        //app = express();
+        //app.on('start', done);
+        //app.use(kraken({
+        //    basedir: process.cwd()
+        //}));
 
         mock = app.listen(1337);
 

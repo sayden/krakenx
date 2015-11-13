@@ -46,7 +46,7 @@
       "enabled": true,
       "priority": 112,
       "module": {
-        "name":"path:./models/UserSchema.js",
+        "name":"path:./controllers/user/models/UserSchema.js",
         "method": "injectUser"
       }
     }
