@@ -1,4 +1,4 @@
-generated kraken react-engine app
+Kraken-X
 ======================
 
 A krakenjs based app with JSX templating and React with NoSQL persistence

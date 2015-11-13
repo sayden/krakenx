@@ -33,12 +33,10 @@ describe('article', function () {
 
     it('should say "hello"', function (done) {
         request(mock)
-            .get('/article')
+            .get('/api/article')
             .expect(200)
-            .expect('Content-Type', /html/)
-            
-                .expect(/"name": "index"/)
-            
+            .expect('Content-Type', /json/)
+
             .end(function (err, res) {
                 done(err);
             });
