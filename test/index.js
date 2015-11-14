@@ -20,42 +20,39 @@
 
 var kraken = require('kraken-js'),
     app = require('../index'),
-    request = require('supertest');
+    request = require('supertest'),
+    express = require('express');
 
 
-describe('/', function () {
+describe('API Testing: /', function () {
 
-    var mock;
+  var mock;
 
+  beforeEach(function (done) {
+    app = express();
+    app.on('start', done);
+    app.use(kraken({
+        basedir: process.cwd()
+    }));
 
-    beforeEach(function (done) {
-        //app = express();
-        //app.on('start', done);
-        //app.use(kraken({
-        //    basedir: process.cwd()
-        //}));
-
-        mock = app.listen(1337);
-
-    });
+    mock = app.listen(1337);
+  });
 
 
-    afterEach(function (done) {
-        mock.close(done);
-    });
+  afterEach(function (done) {
+    mock.close(done);
+  });
 
 
-    it('should say "hello"', function (done) {
-        request(mock)
-            .get('/')
-            .expect(200)
-            .expect('Content-Type', /html/)
-            
-                .expect(/"name": "index"/)
-            
-            .end(function (err, res) {
-                done(err);
-            });
-    });
+  it('should get the index', function (done) {
+    request(mock)
+      .get('/')
+      .expect(200)
+      .expect('Content-Type', /html/)
+      .expect(/<!DOCTYPE html>/)
+      .end(function (err, res) {
+          done(err);
+      });
+  });
 
 });

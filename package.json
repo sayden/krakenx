@@ -51,7 +51,8 @@
     "grunt-nodemon": "~0.4.0",
     "grunt-concurrent": "~2.0.4",
     "grunt-node-inspector": "~0.4.1",
-    "grunt-contrib-watch": "~0.6.1"
+    "grunt-contrib-watch": "~0.6.1",
+    "chai": "~3.4.1"
   },
   "generator-kraken": {
     "version": "1.1.2",
