@@ -16,6 +16,7 @@
 'use strict';
 
 var React = require('react');
+var NavBar = require('../components/NavBar.jsx');
 
 module.exports = React.createClass({
 
@@ -24,20 +25,23 @@ module.exports = React.createClass({
         return (
             <html>
                 <head>
-                    <meta charSet='utf-8' />
-                    <title>
-            {this.props.title}
-                    </title>
-<link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.css"/>
-<link rel="stylesheet" href="/components/bootstrap-social/bootstrap-social.css"/>
-<link rel="stylesheet" href="/components/font-awesome/css/font-awesome.css"/>
+                  <meta charSet="utf-8" />
+                  <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+                  <title>{this.props.title}</title>
+
+                  <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.css"/>
+                  <link rel="stylesheet" href="/components/bootstrap-social/bootstrap-social.css"/>
+                  <link rel="stylesheet" href="/components/font-awesome/css/font-awesome.css"/>
+                  <NavBar />
                 </head>
                 <body>
-{this.props.children}
-</body>
-<script src="/components/jquery/dist/jquery.min.js"></script>
-<script src="/components/bootstrap/dist/js/bootstrap.js"></script>
-<script src='/bundle.js'></script>
+                  {this.props.children}
+                <script src="/components/jquery/dist/jquery.min.js"></script>
+                <script src="/components/bootstrap/dist/js/bootstrap.js"></script>
+                <script src='/bundle.js'></script>
+                </body>
             </html>
         );
     }
