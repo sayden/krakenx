@@ -29,9 +29,9 @@ module.exports = React.createClass({
         return (
 
             <Layout {...this.props}>
-            <div id='login'>
-                <div className="col-md-2"><GoogleButton destination="/auth/google" message="Google" /></div>
-                <div className="col-md-2"><FacebookButton destination="/auth/facebook" message="Facebook" /></div>
+            <div id='login' className="col-md-10 col-md-offset-1">
+                <div className="col-md-6 col-xs-12"><GoogleButton destination="/auth/google" message="Google" /></div>
+                <div className="col-md-6 col-xs-12"><FacebookButton destination="/auth/facebook" message="Facebook" /></div>
             </div>
         </Layout>
         );

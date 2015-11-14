@@ -6,7 +6,7 @@ var Layout = require('../layout.jsx');
 module.exports = React.createClass({
   render: function render(){
     return (
-      <Layout {...this.props}>
+        <div>
         <h1>New Article</h1>
         <form className="col-sm-8">
           <div className="form-group">
@@ -23,7 +23,7 @@ module.exports = React.createClass({
           <h4>Links</h4>
           <a href="/article">Article home</a>
         </div>
-      </Layout>
+      </div>
     )
   }
 });
