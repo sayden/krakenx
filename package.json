@@ -5,9 +5,10 @@
   "author": "Mario Castro",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test",
+    "test": "mocha --compilers .:test/compiler.js --require test/dom-mocks.js test/*.jsx --reporter spec --ui bdd",
     "browserify": "browserify -t reactify -t require-globify public/index.js -o public/bundle.js",
-    "install-all": "npm install; bower install"
+    "install-all": "npm install; bower install",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --compilers jsx:test/compiler.js test"
   },
   "dependencies": {
     "engine-munger": "^0.2.0",
@@ -59,7 +60,9 @@
     "jsdom": "~7.0.2",
     "mocha-jsdom": "~1.0.0",
     "casperjs": "~1.1.0-beta3",
-    "mocha-casperjs": "~0.5.4"
+    "mocha-casperjs": "~0.5.4",
+    "istanbul-react": "~1.1.0",
+    "jshint": "~2.9.1-rc1"
   },
   "generator-kraken": {
     "version": "1.1.2",
