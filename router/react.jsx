@@ -21,7 +21,7 @@ var Router = require('react-router');
 var App = require('../public/views/app.jsx');
 var Home = require('../public/views/home.jsx');
 var NewArticle = require('../public/views/articles/new_article.jsx');
-var Articles = require('../public/views/article.jsx');
+var Articles = require('../public/views/articles/article.jsx');
 
 var routes = module.exports = (
   <Router.Route path='/' handler={App}>

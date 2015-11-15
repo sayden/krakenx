@@ -13,8 +13,8 @@
           "renderer": {
             "method": "create",
               "arguments": [{
-                  "routes": "require:./routes/react.jsx",
-                  "routesFilePath": "path:./routes/react.jsx"
+                  "routes": "require:./router/react.jsx",
+                  "routesFilePath": "path:./router/react.jsx"
               }]
           }
       }
@@ -28,7 +28,7 @@
     },
     "router": {
       "module": {
-        "arguments": [{"directory": "path:./controllers"}]
+        "arguments": [{"directory": "path:./router"}]
       }
     },
 
@@ -46,7 +46,7 @@
       "enabled": true,
       "priority": 112,
       "module": {
-        "name":"path:./controllers/user/models/UserSchema.js",
+        "name":"path:./router/user/models/UserSchema.js",
         "method": "injectUser"
       }
     }

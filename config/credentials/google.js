@@ -1,7 +1,7 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-  User = require('../../controllers/user/models/UserSchema'),
+  User = require('../../router/user/models/UserSchema'),
   googleConfigAuth = require('./config'),
-  auth = require('../../routes/strategies/auth');
+  auth = require('../auth');
 
 module.exports = function(passport) {
 

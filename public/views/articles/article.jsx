@@ -1,8 +1,8 @@
 'use strict';
 
 var React = require('react');
-var Layout = require('./layout.jsx');
-var ListItem = require('./articles/components/ListItem.jsx');
+var Layout = require('./../layout.jsx');
+var ListItem = require('./components/ListItem.jsx');
 
 module.exports = React.createClass({
   render: function render(){
@@ -14,9 +14,9 @@ module.exports = React.createClass({
         <p><a href="/article">Articles Home</a></p>
         <p><a href="/article/new">New Article view</a></p>
         <div>
-          <ListItem title="Test" />
-          <ListItem title="Test" />
-          <ListItem title="Test" />
+          <ListItem article={ {title:"Test", id:1} } />
+          <ListItem article={ {title:"Test2", id:2} } />
+          <ListItem article={ {title:"Test3", id:3} } />
         </div>
       </Layout>
     )

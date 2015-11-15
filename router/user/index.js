@@ -15,33 +15,35 @@
 
 'use strict';
 
-var IndexModel = require('../models/index'),
-  passport = require('passport');
+var UserModel = require('./models/user');
+var auth = require('../../config/auth'),
+    passport = require('passport');
 
 
 module.exports = function (router) {
 
-    var model = new IndexModel();
+  var model = new UserModel();
 
-    router.get('/', function (req, res) {
-        res.render(req.url, model);
-    });
+  router.get('/', auth.isAuthenticated(), function(req, res){
+    res.render('user/user', model);
+  });
 
-    router.get('/server', function(req, res) {
-        res.render('server', model);
-    });
+  // route for logging out
+  router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
 
-    router.get('/login', function(req, res){
-      //Include any error messages that come from the login process.
-      model.messages = req.flash('error');
-      res.render('login', model);
-    });
+  router.get('/me', auth.isAuthenticated(), function(req, res){
+    res.json({ id: req.user.id, username: req.user.username });
+  });
 
-    // route for logging out
-    router.get('/logout', function(req, res) {
-      req.logout();
-      res.redirect('/');
-    });
+  router.get('/login', function(req, res){
+    //Include any error messages that come from the login process.
+    model.messages = req.flash('error');
+    res.render('user/login', model);
+  });
+
 
 
   // =====================================
@@ -58,8 +60,8 @@ module.exports = function (router) {
   router.get('/auth/google/callback',
     passport.authenticate('google', {
       successRedirect : '/user/#',
-      failureRedirect : '/login'
-  }));
+      failureRedirect : '/user/login'
+    }));
 
 
   // =====================================
@@ -70,12 +72,12 @@ module.exports = function (router) {
   router.get('/auth/facebook',
     passport.authenticate('facebook', {
       scope : ['email']
-    }));
+  }));
 
   // the callback after google has authenticated the user
   router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       successRedirect : '/user/#',
-      failureRedirect : '/login'
-    }));
+      failureRedirect : '/user/login'
+  }));
 };

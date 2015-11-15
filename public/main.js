@@ -15,7 +15,7 @@
 
 'use strict';
 
-var Routes = require('../routes/react.jsx');
+var Routes = require('../router/react.jsx');
 var Client = require('react-engine/lib/client');
 
 // Include all view files. Browerify doesn't do

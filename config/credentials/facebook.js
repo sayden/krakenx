@@ -1,5 +1,5 @@
 var FacebookStrategy = require('passport-facebook').Strategy,
-  User = require('../../controllers/user/models/UserSchema'),
+  User = require('../../router/user/models/UserSchema'),
   config = require('./config');
 
 module.exports = function(passport) {
@@ -36,7 +36,7 @@ module.exports = function(passport) {
       };
 
       // Save the user OAuth profile
-      user.saveOAuthUserProfile(req, providerUserProfile, done);
+      User.saveOAuthUserProfile(req, providerUserProfile, done);
 
       function generateUsername(profile) {
         var username = '';

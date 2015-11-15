@@ -15,25 +15,14 @@
 
 'use strict';
 
-var Layout = require('./layout.jsx');
-var React = require('react');
-var GoogleButton = require('../components/GoogleButton.jsx');
-var FacebookButton = require('../components/FacebookButton.jsx');
+var IndexModel = require('../models/index');
 
-module.exports = React.createClass({
 
-    displayName: 'login',
+module.exports = function (router) {
 
-    render: function render() {
+    var model = new IndexModel();
 
-        return (
-
-            <Layout {...this.props}>
-            <div id='login' className="col-md-10 col-md-offset-1">
-                <div className="col-md-6 col-xs-12"><GoogleButton destination="/auth/google" message="Google" /></div>
-                <div className="col-md-6 col-xs-12"><FacebookButton destination="/auth/facebook" message="Facebook" /></div>
-            </div>
-        </Layout>
-        );
-    }
-});
+    router.get('/', function (req, res) {
+        res.render(req.url, model);
+    });
+};

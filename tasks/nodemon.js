@@ -12,7 +12,7 @@ module.exports = function nodemon(grunt){
           console.log(event.colour);
         });
       },
-      watch:['./controllers/*','./public/*']
+      watch:['./router/*','./public/*']
     }
   }
 };

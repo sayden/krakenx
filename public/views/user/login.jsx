@@ -15,26 +15,25 @@
 
 'use strict';
 
-var Layout = require('./layout.jsx');
+var Layout = require('./../layout.jsx');
 var React = require('react');
+var GoogleButton = require('../../components/GoogleButton.jsx');
+var FacebookButton = require('../../components/FacebookButton.jsx');
 
 module.exports = React.createClass({
 
-    onButtonClick: function() {
-        alert('I was rendered on server side but I am clickable because of client mounting!');
-    },
+    displayName: 'login',
 
     render: function render() {
 
         return (
+
             <Layout {...this.props}>
-                <div id='index'>
-                    <h1>Hello {this.props.name}!</h1>
-                    <button onClick={this.onButtonClick}>Click Me</button>
-                    <br/>
-                    <a href='/'>Click to go to an react-router rendered view</a>
-                </div>
-            </Layout>
+            <div id='login' className="col-md-10 col-md-offset-1">
+                <div className="col-md-6 col-xs-12"><GoogleButton destination="/user/auth/google" message="Google" /></div>
+                <div className="col-md-6 col-xs-12"><FacebookButton destination="/user/auth/facebook" message="Facebook" /></div>
+            </div>
+        </Layout>
         );
     }
 });

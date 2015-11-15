@@ -22,7 +22,7 @@ module.exports = function jshint(grunt) {
     // Options
     return {
         files: [
-            'controllers/**/*.js',
+            'router/**/*.js',
             'lib/**/*.js',
             'models/**/*.js'
         ],

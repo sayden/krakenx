@@ -1,7 +1,7 @@
 'use strict';
 
 //var ArticleModel = require('../../../models/article');
-var auth = require('../../../routes/strategies/auth');
+var auth = require('../../../config/auth');
 
 
 module.exports = function (router) {

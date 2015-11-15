@@ -1,9 +1,12 @@
 'use strict';
 
 var React = require('react');
-var Layout = require('./layout.jsx');
+var Layout = require('./../layout.jsx');
 
 module.exports = React.createClass({
+
+  displayName: 'user',
+
   render: function render(){
     return (
       <Layout {...this.props}>
