@@ -21,12 +21,13 @@ module.exports = function mochacli(grunt) {
 
     // Options
     return {
-        src: ['test/**/*.js'],
-        options: {
-            timeout: 6000,
-            'check-leaks': true,
-            ui: 'bdd',
-            reporter: 'spec'
+        src: ['test/*.jsx'],
+        options:{
+          timeout: 6000,
+          compilers: ['.:test/compiler.js'],
+          ui: 'bdd',
+          require:['test/dom-mocks.js'],
+          reporter: 'spec'
         }
     };
 };

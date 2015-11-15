@@ -1,1 +1,0 @@
---compilers .:test/compiler.js test/*test.jsx --require test/dom-mocks.js
