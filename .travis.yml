@@ -3,8 +3,3 @@ node_js:
  - "5.0.0"
 before_install: npm install -g grunt-cli
 install: npm install
-addons:
-  code_climate:
-    repo_token: 8a405b00f1c4f57094cdd768148c11a3bd905bf3b03f29edc4236bfec304614d
-after_script:
-  - codeclimate < coverage/lcov.info
