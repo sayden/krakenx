@@ -18,6 +18,8 @@
 var express = require('express');
 var kraken = require('kraken-js');
 var nodeJSX = require('node-jsx');
+var passport = require('passport');
+var flash = require('connect-flash');
 
 var options, app;
 
@@ -42,8 +44,24 @@ nodeJSX.install({
     extension: '.jsx'
 });
 
+// Setup Mongo
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+
 app = module.exports = express();
+
+app.on('middleware:after:session', function configPassport(eventargs) {
+  //Setup passport
+  var passport = require('passport');
+  var googleSetup = require('./config/credentials/google')(passport);
+  var facebookSetup = require('./config/credentials/facebook')(passport);
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash())
+});
+
 app.use(kraken(options));
+
 app.on('start', function () {
     console.log('Application ready to serve requests.');
     console.log('Environment: %s', app.kraken.get('env:env'));

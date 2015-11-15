@@ -1,0 +1,54 @@
+
+{
+  "express": {
+    "view engine": "jsx",
+    "view": "require:react-engine/lib/expressView",
+    "view cache": false,
+    "views": "path:./public/views"
+  },
+
+  "view engines": {
+      "jsx": {
+          "module": "react-engine/lib/server",
+          "renderer": {
+            "method": "create",
+              "arguments": [{
+                  "routes": "require:./routes/react.jsx",
+                  "routesFilePath": "path:./routes/react.jsx"
+              }]
+          }
+      }
+  },
+
+  "middleware": {
+    "static": {
+      "module": {
+        "arguments": ["path:./.build"]
+      }
+    },
+    "router": {
+      "module": {
+        "arguments": [{"directory": "path:./controllers"}]
+      }
+    },
+
+    //flash messaging middleware
+    "flash": {
+      "priority": 91,
+      "enabled": true,
+      "module": {
+        "name":"connect-flash",
+        "method": "flash"
+      }
+    },
+    //add the user to the response object
+    "injectUser": {
+      "enabled": true,
+      "priority": 112,
+      "module": {
+        "name":"path:./controllers/user/models/UserSchema.js",
+        "method": "injectUser"
+      }
+    }
+  }
+}

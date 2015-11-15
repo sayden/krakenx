@@ -15,19 +15,19 @@
 
 'use strict';
 
-var React = require('react');
-var Router = require('react-router');
+var UserModel = require('./models/user');
+var auth = require('../../routes/strategies/auth');
 
-var App = require('../public/views/app.jsx');
-var Home = require('../public/views/home.jsx');
-var NewArticle = require('../public/views/articles/new_article.jsx');
-var Articles = require('../public/views/article.jsx');
 
-var routes = module.exports = (
-  <Router.Route path='/' handler={App}>
-      <Router.DefaultRoute name='home' handler={Home} />
-      <Router.Route name='article' >
-        <Router.Route path='/new' handler={NewArticle} />
-      </Router.Route>
-  </Router.Route>
-);
+module.exports = function (router) {
+
+  var model = new UserModel();
+
+  router.get('/', auth.isAuthenticated(), function(req, res){
+    res.render('user', model);
+  });
+
+  router.get('/me', auth.isAuthenticated(), function(req, res){
+    res.json({ id: req.user.id, username: req.user.username });
+  });
+};

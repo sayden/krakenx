@@ -13,49 +13,27 @@
  |  the specific language governing permissions and limitations under the License.                                     |
  \*-------------------------------------------------------------------------------------------------------------------*/
 
-/*global describe:false, it:false, beforeEach:false, afterEach:false*/
-
 'use strict';
 
+var Layout = require('./layout.jsx');
+var React = require('react');
+var GoogleButton = require('../components/GoogleButton.jsx');
+var FacebookButton = require('../components/FacebookButton.jsx');
 
-var kraken = require('kraken-js'),
-    express = require('express'),
-    request = require('supertest');
+module.exports = React.createClass({
 
+    displayName: 'login',
 
-describe('/', function () {
+    render: function render() {
 
-    var app, mock;
+        return (
 
-
-    beforeEach(function (done) {
-        app = express();
-        app.on('start', done);
-        app.use(kraken({
-            basedir: process.cwd()
-        }));
-
-        mock = app.listen(1337);
-
-    });
-
-
-    afterEach(function (done) {
-        mock.close(done);
-    });
-
-
-    it('should say "hello"', function (done) {
-        request(mock)
-            .get('/')
-            .expect(200)
-            .expect('Content-Type', /html/)
-            
-                .expect(/"name": "index"/)
-            
-            .end(function (err, res) {
-                done(err);
-            });
-    });
-
+            <Layout {...this.props}>
+            <div id='login' className="col-md-10 col-md-offset-1">
+                <div className="col-md-6 col-xs-12"><GoogleButton destination="/auth/google" message="Google" /></div>
+                <div className="col-md-6 col-xs-12"><FacebookButton destination="/auth/facebook" message="Facebook" /></div>
+            </div>
+        </Layout>
+        );
+    }
 });

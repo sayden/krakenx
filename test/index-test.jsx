@@ -13,21 +13,46 @@
  |  the specific language governing permissions and limitations under the License.                                     |
  \*-------------------------------------------------------------------------------------------------------------------*/
 
+/*global describe:false, it:false, beforeEach:false, afterEach:false*/
+
 'use strict';
 
-var React = require('react');
-var Router = require('react-router');
 
-var App = require('../public/views/app.jsx');
-var Home = require('../public/views/home.jsx');
-var NewArticle = require('../public/views/articles/new_article.jsx');
-var Articles = require('../public/views/article.jsx');
+var kraken = require('kraken-js'),
+    app = require('../index'),
+    request = require('supertest'),
+    express = require('express');
 
-var routes = module.exports = (
-  <Router.Route path='/' handler={App}>
-      <Router.DefaultRoute name='home' handler={Home} />
-      <Router.Route name='article' >
-        <Router.Route path='/new' handler={NewArticle} />
-      </Router.Route>
-  </Router.Route>
-);
+
+describe('API Testing: /', function () {
+
+  var mock;
+
+  beforeEach(function (done) {
+    app = express();
+    app.on('start', done);
+    app.use(kraken({
+        basedir: process.cwd()
+    }));
+
+    mock = app.listen(1337);
+  });
+
+
+  afterEach(function (done) {
+    mock.close(done);
+  });
+
+
+  it('should get the index', function (done) {
+    request(mock)
+      .get('/')
+      .expect(200)
+      .expect('Content-Type', /html/)
+      .expect(/<!DOCTYPE html>/)
+      .end(function (err, res) {
+          done(err);
+      });
+  });
+
+});

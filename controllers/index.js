@@ -15,7 +15,8 @@
 
 'use strict';
 
-var IndexModel = require('../models/index');
+var IndexModel = require('../models/index'),
+  passport = require('passport');
 
 
 module.exports = function (router) {
@@ -30,4 +31,51 @@ module.exports = function (router) {
         res.render('server', model);
     });
 
+    router.get('/login', function(req, res){
+      //Include any error messages that come from the login process.
+      model.messages = req.flash('error');
+      res.render('login', model);
+    });
+
+    // route for logging out
+    router.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+    });
+
+
+  // =====================================
+  // GOOGLE ROUTES =======================
+  // =====================================
+  // send to google to do the authentication profile gets us their basic
+  // information including their name email gets their emails
+  router.get('/auth/google',
+    passport.authenticate('google', {
+      scope : ['profile', 'email']
+    }));
+
+  // the callback after google has authenticated the user
+  router.get('/auth/google/callback',
+    passport.authenticate('google', {
+      successRedirect : '/user/#',
+      failureRedirect : '/login'
+  }));
+
+
+  // =====================================
+  // FACEBOOK ROUTES =====================
+  // =====================================
+  // send to google to do the authentication profile gets us their basic
+  // information including their name email gets their emails
+  router.get('/auth/facebook',
+    passport.authenticate('facebook', {
+      scope : ['email']
+    }));
+
+  // the callback after google has authenticated the user
+  router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      successRedirect : '/user/#',
+      failureRedirect : '/login'
+    }));
 };
