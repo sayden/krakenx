@@ -15,7 +15,7 @@
 
 'use strict';
 
-var Layout = require('./../layout.jsx');
+var Layout = require('../../views/layout.jsx');
 var React = require('react');
 var GoogleButton = require('../../components/GoogleButton.jsx');
 var FacebookButton = require('../../components/FacebookButton.jsx');

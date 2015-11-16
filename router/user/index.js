@@ -41,7 +41,7 @@ module.exports = function (router) {
   router.get('/login', function(req, res){
     //Include any error messages that come from the login process.
     model.messages = req.flash('error');
-    res.render('user/login', model);
+    res.render('user/views/login', model);
   });
 
 

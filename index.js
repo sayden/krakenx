@@ -28,13 +28,16 @@ var options, app;
  * See https://github.com/krakenjs/kraken-js#options for additional configuration options.
  */
 options = {
-    onconfig: function (config, next) {
-        /*
-         * Add any additional config setup or overrides here. `config` is an initialized
-         * `confit` (https://github.com/krakenjs/confit/) configuration object.
-         */
+  onconfig: function (config, next) {
+    /*
+     * Add any additional config setup or overrides here. `config` is an initialized
+     * `confit` (https://github.com/krakenjs/confit/) configuration object.
+     */
+    config._store.express.views = require('./lib/utils')
+      .getViewsPath('public', '/views/');
+    console.log(config._store.express.views);
 
-        next(null, config);
+    next(null, config);
     }
 };
 

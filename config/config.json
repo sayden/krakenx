@@ -1,10 +1,9 @@
-
 {
   "express": {
     "view engine": "jsx",
     "view": "require:react-engine/lib/expressView",
     "view cache": false,
-    "views": "path:./public/views"
+    "views": "path:./public"
   },
 
   "view engines": {
