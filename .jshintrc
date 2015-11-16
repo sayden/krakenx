@@ -56,7 +56,7 @@
   "bitwise": true,
 
   // true = Require {} for every new block or scope
-  "curly": true,
+  "curly": false,
 
   // true = Require filtering for..in loops with obj.hasOwnProperty()
   "forin": false,
