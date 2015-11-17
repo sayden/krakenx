@@ -33,9 +33,9 @@ options = {
      * Add any additional config setup or overrides here. `config` is an initialized
      * `confit` (https://github.com/krakenjs/confit/) configuration object.
      */
-    config._store.express.views = require('./lib/utils')
-      .getViewsPath('public', '/views/');
-    console.log(config._store.express.views);
+    //config._store.express.views = require('./lib/utils')
+    //  .getViewsPath('public', '/views/');
+    //console.log(config._store.express.views);
 
     next(null, config);
     }

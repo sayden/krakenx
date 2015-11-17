@@ -1,8 +1,8 @@
 'use strict';
 
 var React = require('react');
-var Layout = require('./../layout.jsx');
-var ListItem = require('./components/ListItem.jsx');
+var Layout = require('./../../views/layout.jsx');
+var ListItem = require('./../components/ListItem.jsx');
 
 module.exports = React.createClass({
   render: function render(){

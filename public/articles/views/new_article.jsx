@@ -1,20 +1,29 @@
 'use strict';
 
 var React = require('react');
-var Layout = require('../layout.jsx');
+var Layout = require('../../views/layout.jsx');
 
 module.exports = React.createClass({
+
+  displayName: 'new-article',
+
+  OnClick: function OnClick(){
+    alert("Tested");
+    console.log("Tested");
+  },
+
   render: function render(){
     return (
-        <div>
+      <div>
         <h1>New Article</h1>
+        <button onClick={this.OnClick}>Test</button>
         <form className="col-sm-8">
           <div className="form-group">
-            <label for="title">Title</label>
+            <label htmlFor="title">Title</label>
             <input type="text" className="form-control" id="title" placeholder="title" />
           </div>
           <div className="form-group">
-            <label for="textarea">Article body</label>
+            <label htmlFor="textarea">Article body</label>
             <textarea className="form-control" rows="3"></textarea>
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>

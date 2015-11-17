@@ -9,7 +9,7 @@ module.exports = function (router) {
   var model = new ArticleModel();
 
   router.get('/', auth.isAuthenticated(), function (req, res) {
-    res.render('articles/article', model);
+    res.render('articles/views/article', model);
   });
 
   router.get('/new', auth.isAuthenticated(), function(req, res){

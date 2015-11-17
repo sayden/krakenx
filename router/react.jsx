@@ -17,17 +17,20 @@
 
 var React = require('react');
 var Router = require('react-router');
+var Route = Router.Route;
 
 var App = require('../public/views/app.jsx');
 var Home = require('../public/views/home.jsx');
-var NewArticle = require('../public/views/articles/new_article.jsx');
-var Articles = require('../public/views/articles/article.jsx');
+var NewArticle = require('../public/articles/views/new_article.jsx');
+var Articles = require('../public/articles/views/article.jsx');
+var Login = require('../public/user/views/login.jsx');
 
 var routes = module.exports = (
-  <Router.Route path='/' handler={App}>
+  <Route path='/' handler={App}>
       <Router.DefaultRoute name='home' handler={Home} />
-      <Router.Route name='article' >
-        <Router.Route path='/new' handler={NewArticle} />
-      </Router.Route>
-  </Router.Route>
+      <Route path='/login' name='login' handler={Login} />
+      <Route path='/article' name='article' handler={Articles} />
+      <Route path='/article/new' name='new-article' handler={NewArticle} />
+      <Route path='/new' name='new-article2' handler={NewArticle} />
+  </Route>
 );

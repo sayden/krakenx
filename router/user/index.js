@@ -25,7 +25,7 @@ module.exports = function (router) {
   var model = new UserModel();
 
   router.get('/', auth.isAuthenticated(), function(req, res){
-    res.render('user/user', model);
+    res.render('user/views/user', model);
   });
 
   // route for logging out
