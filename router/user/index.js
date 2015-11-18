@@ -15,17 +15,13 @@
 
 'use strict';
 
-var UserModel = require('./models/user');
 var auth = require('../../config/auth'),
     passport = require('passport');
 
-
 module.exports = function (router) {
 
-  var model = new UserModel();
-
   router.get('/', auth.isAuthenticated(), function(req, res){
-    res.render('user/views/user', model);
+    res.render('user/views/user', {});
   });
 
   // route for logging out
@@ -40,6 +36,7 @@ module.exports = function (router) {
 
   router.get('/login', function(req, res){
     //Include any error messages that come from the login process.
+    var model = {};
     model.messages = req.flash('error');
     res.render('user/views/login', model);
   });

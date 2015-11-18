@@ -28,9 +28,8 @@ var Login = require('../public/user/views/login.jsx');
 var routes = module.exports = (
   <Route path='/' handler={App}>
       <Router.DefaultRoute name='home' handler={Home} />
-      <Route path='/login' name='login' handler={Login} />
+      <Route path='/user/login' name='login' handler={Login} />
       <Route path='/article' name='article' handler={Articles} />
-      <Route path='/article/new' name='new-article' handler={NewArticle} />
-      <Route path='/new' name='new-article2' handler={NewArticle} />
+      <Route path='/article/new' name='article-new' handler={NewArticle} />
   </Route>
 );
