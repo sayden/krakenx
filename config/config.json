@@ -26,8 +26,13 @@
       }
     },
     "router": {
+      "enabled":true,
       "module": {
-        "arguments": [{"directory": "path:./router"}]
+        "arguments": [
+          {
+            "directory": "path:./router"
+          }
+        ]
       }
     },
 
@@ -45,7 +50,7 @@
       "enabled": true,
       "priority": 112,
       "module": {
-        "name":"path:./router/user/models/UserSchema.js",
+        "name":"path:./modules/user/models/UserSchema.js",
         "method": "injectUser"
       }
     }

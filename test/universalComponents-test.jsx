@@ -17,7 +17,7 @@ describe('Testing reusable components between apps', function() {
   describe('Login components', function(){
     it('Google button should contain expected title and destination',
       function(){
-        var Google = require('../public/components/GoogleButton.jsx');
+        var Google = require('./components/GoogleButton.jsx');
 
         var infoJson = {destination: "/login/auth", message:"Google"};
         var google = TestUtils.renderIntoDocument(
@@ -35,7 +35,7 @@ describe('Testing reusable components between apps', function() {
 
     it('Facebook button should contain expected title and destination',
       function(){
-        var Facebook = require('../public/components/FacebookButton.jsx');
+        var Facebook = require('./components/FacebookButton.jsx');
 
         var infoJson = {destination: "/login/auth", message:"Facebook"};
         var facebook = TestUtils.renderIntoDocument(

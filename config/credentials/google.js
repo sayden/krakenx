@@ -1,5 +1,7 @@
+'use strict';
+
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-  User = require('../../router/user/models/UserSchema'),
+  User = require('../../modules/user/models/UserSchema'),
   googleConfigAuth = require('./config'),
   auth = require('../auth');
 

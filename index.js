@@ -34,7 +34,7 @@ options = {
      * `confit` (https://github.com/krakenjs/confit/) configuration object.
      */
     //config._store.express.views = require('./lib/utils')
-    //  .getViewsPath('public', '/views/');
+    //  .getViewsPath('modules', '/views/');
     //console.log(config._store.express.views);
 
     next(null, config);
@@ -56,8 +56,8 @@ app = module.exports = express();
 app.on('middleware:after:session', function configPassport(eventargs) {
   //Setup passport
   var passport = require('passport');
-  var googleSetup = require('./config/credentials/google')(passport);
-  var facebookSetup = require('./config/credentials/facebook')(passport);
+  require('./config/credentials/google')(passport);
+  require('./config/credentials/facebook')(passport);
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash())

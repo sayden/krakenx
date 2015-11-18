@@ -8,7 +8,7 @@ describe('Utils library tests', function(){
     var Utils = require('../lib/utils');
 
     var result =
-      Utils.getViewsPath('/home/mariocaster/tmp/krakenx/public', '/views/');
+      Utils.getViewsPath('/home/mariocaster/tmp/krakenx/modules', '/views/');
     result.should.not.be.undefined;
     result.should.not.be.null;
     result.should.be.instanceOf(Array);

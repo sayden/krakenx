@@ -9,7 +9,7 @@ module.exports = function watch(grunt){
       tasks: ['jshint:gruntfile']
     },
     src: {
-      files: ['./public/**/*.js', './public/**/*.jsx', 'css/**/*.scss'],
+      files: ['./modules/**/*.js', './modules/**/*.jsx', 'css/**/*.scss'],
       tasks: ['browserify']
     }
   }

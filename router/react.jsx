@@ -19,11 +19,11 @@ var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
 
-var App = require('../public/views/app.jsx');
-var Home = require('../public/views/home.jsx');
-var NewArticle = require('../public/articles/views/new_article.jsx');
-var Articles = require('../public/articles/views/article.jsx');
-var Login = require('../public/user/views/login.jsx');
+var App = require('../modules/views/app.jsx');
+var Home = require('../modules/views/home.jsx');
+var NewArticle = require('../modules/articles/views/new_article.jsx');
+var Articles = require('../modules/articles/views/article.jsx');
+var Login = require('../modules/user/views/login.jsx');
 
 var routes = module.exports = (
   <Route path='/' handler={App}>
