@@ -20,8 +20,16 @@ var kraken = require('kraken-js');
 var nodeJSX = require('node-jsx');
 var passport = require('passport');
 var flash = require('connect-flash');
+var app = module.exports = express();
 
-var options, app;
+//var router = express.Router();
+
+// Main entrance point
+app.get('/', function (req, res) {
+  res.render(req.url, {});
+});
+
+var options;
 
 /*
  * Create and configure application. Also exports application instance for use by tests.
@@ -33,16 +41,12 @@ options = {
      * Add any additional config setup or overrides here. `config` is an initialized
      * `confit` (https://github.com/krakenjs/confit/) configuration object.
      */
-    //config._store.express.views = require('./lib/utils')
-    //  .getViewsPath('modules', '/views/');
-    //console.log(config._store.express.views);
 
     next(null, config);
     }
 };
 
-// install node-jsx, so that we
-// can require `.jsx` files in node.
+// install node-jsx, so that we can require `.jsx` files in node.
 nodeJSX.install({
     extension: '.jsx'
 });
@@ -51,16 +55,21 @@ nodeJSX.install({
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
-app = module.exports = express();
 
 app.on('middleware:after:session', function configPassport(eventargs) {
   //Setup passport
-  var passport = require('passport');
   require('./config/credentials/google')(passport);
   require('./config/credentials/facebook')(passport);
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(flash())
+
+  //Init express router
+  var Utils = require('./lib/utils');
+  Utils.initRoutes(app);
+  //app.use(express.static('./modules'));
+
+
+  app.use(flash());
 });
 
 app.use(kraken(options));
@@ -69,3 +78,4 @@ app.on('start', function () {
     console.log('Application ready to serve requests.');
     console.log('Environment: %s', app.kraken.get('env:env'));
 });
+

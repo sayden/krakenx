@@ -15,9 +15,21 @@
 
 'use strict';
 
-module.exports = function (router) {
+var React = require('react');
+var Router = require('react-router');
+var Route = Router.Route;
 
-    router.get('/', function (req, res) {
-        res.render(req.url, {});
-    });
-};
+var App = require('./views/app.jsx');
+var Home = require('./views/home.jsx');
+var NewArticle = require('./articles/views/new_article.jsx');
+var Articles = require('./articles/views/article.jsx');
+var Login = require('./user/views/login.jsx');
+
+var routes = module.exports = (
+  <Route path='/' handler={App}>
+      <Router.DefaultRoute name='home' handler={Home} />
+      <Route path='/user/login' name='login' handler={Login} />
+      <Route path='/article' name='article' handler={Articles} />
+      <Route path='/article/new' name='article-new' handler={NewArticle} />
+  </Route>
+);

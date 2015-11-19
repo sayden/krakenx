@@ -20,24 +20,24 @@ var auth = require('../../../config/auth'),
 
 module.exports = function (router) {
 
-  router.get('/', auth.isAuthenticated(), function(req, res){
+  router.get('/user', auth.isAuthenticated(), function(req, res){
     res.render('user/views/user', {});
   });
 
   // route for logging out
-  router.get('/logout', function(req, res) {
+  router.get('/user/logout', function(req, res) {
     req.logout();
     res.redirect('/');
   });
 
-  router.get('/me', auth.isAuthenticated(), function(req, res){
+  router.get('/user/me', auth.isAuthenticated(), function(req, res){
     res.json({ id: req.user.id, username: req.user.username });
   });
 
-  router.get('/login', function(req, res){
+  router.get('/user/login', function(req, res){
     //Include any error messages that come from the login process.
     var model = {};
-    model.messages = req.flash('error');
+    //model.messages = req.flash('error');
     res.render('user/views/login', model);
   });
 
@@ -48,13 +48,13 @@ module.exports = function (router) {
   // =====================================
   // send to google to do the authentication profile gets us their basic
   // information including their name email gets their emails
-  router.get('/auth/google',
+  router.get('/user/auth/google',
     passport.authenticate('google', {
       scope : ['profile', 'email']
     }));
 
   // the callback after google has authenticated the user
-  router.get('/auth/google/callback',
+  router.get('/user/auth/google/callback',
     passport.authenticate('google', {
       successRedirect : '/user/#',
       failureRedirect : '/user/login'
@@ -66,13 +66,13 @@ module.exports = function (router) {
   // =====================================
   // send to google to do the authentication profile gets us their basic
   // information including their name email gets their emails
-  router.get('/auth/facebook',
+  router.get('/user/auth/facebook',
     passport.authenticate('facebook', {
       scope : ['email']
   }));
 
   // the callback after google has authenticated the user
-  router.get('/auth/facebook/callback',
+  router.get('/user/auth/facebook/callback',
     passport.authenticate('facebook', {
       successRedirect : '/user/#',
       failureRedirect : '/user/login'

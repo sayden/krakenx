@@ -15,24 +15,31 @@
 
 'use strict';
 
-var Routes = require('../router/react.jsx');
+var Routes = require('./router.jsx');
 var Client = require('react-engine/lib/client');
 
-// Include all view files. Browerify doesn't do
-// this automatically as it can only operate on
-// static require statements.
-require('./**/views/*.jsx', {glob: true});
+//Include all view files. Browerify doesn't do this automatically as it can
+//only operate on static require statements.
+require('./views/*.jsx', {glob: true});
+//require('./views/home.jsx');
+//require('./views/app.jsx');
+//require('./views/layout.jsx');
 
 // boot options
 var options = {
     routes: Routes,
-    // supply a function that can be called
-    // to resolve the file that was rendered.
+  //supply a function that can be called to resolve the file that was rendered.
     viewResolver: function(viewName) {
         return require('./' + viewName);
     }
 };
 
-document.addEventListener('DOMContentLoaded', function onLoad() {
+//var document = typeof document === 'undefined' ? '' : document;
+
+if(typeof document === 'undefined'){
+  console.log('FIXME: modules/main.js loading in server');
+} else {
+  document.addEventListener('DOMContentLoaded', function onLoad() {
     Client.boot(options);
-});
+  });
+}

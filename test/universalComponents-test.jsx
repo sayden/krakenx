@@ -5,7 +5,7 @@ var jsdom = require('mocha-jsdom');
 var should = require('chai').should();
 var React = require('react/addons');
 
-describe('Testing reusable components between apps', function() {
+describe('Testing reusable bower_components between apps', function() {
   jsdom({ skipWindowCheck: true });
 
   var TestUtils;
@@ -14,10 +14,10 @@ describe('Testing reusable components between apps', function() {
     TestUtils = React.addons.TestUtils;
   });
 
-  describe('Login components', function(){
+  describe('Login bower_components', function(){
     it('Google button should contain expected title and destination',
       function(){
-        var Google = require('./components/GoogleButton.jsx');
+        var Google = require('../modules/components/GoogleButton.jsx');
 
         var infoJson = {destination: "/login/auth", message:"Google"};
         var google = TestUtils.renderIntoDocument(
@@ -35,7 +35,7 @@ describe('Testing reusable components between apps', function() {
 
     it('Facebook button should contain expected title and destination',
       function(){
-        var Facebook = require('./components/FacebookButton.jsx');
+        var Facebook = require('../modules/components/FacebookButton.jsx');
 
         var infoJson = {destination: "/login/auth", message:"Facebook"};
         var facebook = TestUtils.renderIntoDocument(

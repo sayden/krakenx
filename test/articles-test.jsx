@@ -45,9 +45,9 @@ describe.skip('Articles API testing: ', function () {
     });
 });
 
-describe('Article components', function(){
+describe('Article bower_components', function(){
   it('ListItem should contain text "title" in title prop', function() {
-    var ListItem = require('./articles/components/ListItem.jsx');
+    var ListItem = require('../modules/articles/components/ListItem.jsx');
     var TestUtils = React.addons.TestUtils;
 
     var articleJson = {title: "title1", id:1};
@@ -61,7 +61,7 @@ describe('Article components', function(){
   });
 
   it('ArticleList should contain the 2 h4 "title1" and "title2" tags', function(){
-    var ArticleList = require('./articles/components/ArticleList.jsx');
+    var ArticleList = require('../modules/articles/components/ArticleList.jsx');
     var TestUtils = React.addons.TestUtils;
 
     var articles = [

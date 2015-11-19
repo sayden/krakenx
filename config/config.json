@@ -2,8 +2,8 @@
   "express": {
     "view engine": "jsx",
     "view": "require:react-engine/lib/expressView",
-    "view cache": false,
-    "views": "path:./public"
+    "view cache": true,
+    "views": "path:./modules"
   },
 
   "view engines": {
@@ -12,8 +12,8 @@
           "renderer": {
             "method": "create",
               "arguments": [{
-                  "routes": "require:./router/react.jsx",
-                  "routesFilePath": "path:./router/react.jsx"
+                  "routes": "require:./modules/router.jsx",
+                  "routesFilePath": "path:./modules/router.jsx"
               }]
           }
       }
@@ -22,15 +22,15 @@
   "middleware": {
     "static": {
       "module": {
-        "arguments": ["path:./.build"]
+        "arguments": ["path:./public"]
       }
     },
     "router": {
-      "enabled":true,
+      "enabled":false,
       "module": {
         "arguments": [
           {
-            "directory": "path:./router"
+            "directory": "path:./modules"
           }
         ]
       }

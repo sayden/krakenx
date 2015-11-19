@@ -37,11 +37,16 @@ dist/
 # Intellij
 .idea
 
-# Bower and Browerify
+# Bower and Browserify
 .build
 public/bundle.js
+modules/components
+modules/bower_components
+public/components
+modules/bundle.js
 
 # Istanbul directory used by tools like istanbul
 coverage/*
 !coverage/lcov.info
 instrument
+

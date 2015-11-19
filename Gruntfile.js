@@ -25,6 +25,6 @@ module.exports = function (grunt) {
     // Register group tasks
     grunt.registerTask('build', [ 'jshint', 'browserify' ]);
     grunt.registerTask('test', [ 'jshint', 'mochacli' ]);
-    grunt.registerTask('default', ['build', 'concurrent'])
+    grunt.registerTask('default', ['browserify', 'concurrent'])
 
 };

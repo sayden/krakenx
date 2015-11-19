@@ -198,30 +198,75 @@ module.exports = React.createClass({displayName: "exports",
 
 'use strict';
 
-var Routes = require('../router/react.jsx');
+var Routes = require('./router.jsx');
 var Client = require('react-engine/lib/client');
 
-// Include all view files. Browerify doesn't do
-// this automatically as it can only operate on
-// static require statements.
-require('./articles/views/article.jsx');require('./articles/views/new_article.jsx');require('./user/views/login.jsx');require('./user/views/user.jsx');require('./views/app.jsx');require('./views/home.jsx');require('./views/layout.jsx');
+//Include all view files. Browerify doesn't do this automatically as it can
+//only operate on static require statements.
+require('./views/app.jsx');require('./views/home.jsx');require('./views/layout.jsx');
+//require('./views/home.jsx');
+//require('./views/app.jsx');
+//require('./views/layout.jsx');
 
 // boot options
 var options = {
     routes: Routes,
-    // supply a function that can be called
-    // to resolve the file that was rendered.
+  //supply a function that can be called to resolve the file that was rendered.
     viewResolver: function(viewName) {
         return require('./' + viewName);
     }
 };
 
-document.addEventListener('DOMContentLoaded', function onLoad() {
+//var document = typeof document === 'undefined' ? '' : document;
+
+if(typeof document === 'undefined'){
+  console.log('FIXME: modules/main.js loading in server');
+} else {
+  document.addEventListener('DOMContentLoaded', function onLoad() {
     Client.boot(options);
-});
+  });
+}
 
 
-},{"../router/react.jsx":214,"./articles/views/article.jsx":2,"./articles/views/new_article.jsx":3,"./user/views/login.jsx":9,"./user/views/user.jsx":10,"./views/app.jsx":11,"./views/home.jsx":12,"./views/layout.jsx":13,"react-engine/lib/client":15}],9:[function(require,module,exports){
+},{"./router.jsx":9,"./views/app.jsx":11,"./views/home.jsx":12,"./views/layout.jsx":13,"react-engine/lib/client":15}],9:[function(require,module,exports){
+/*-------------------------------------------------------------------------------------------------------------------*\
+ |  Copyright (C) 2015 PayPal                                                                                          |
+ |                                                                                                                     |
+ |  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance     |
+ |  with the License.                                                                                                  |
+ |                                                                                                                     |
+ |  You may obtain a copy of the License at                                                                            |
+ |                                                                                                                     |
+ |       http://www.apache.org/licenses/LICENSE-2.0                                                                    |
+ |                                                                                                                     |
+ |  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed   |
+ |  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for  |
+ |  the specific language governing permissions and limitations under the License.                                     |
+ \*-------------------------------------------------------------------------------------------------------------------*/
+
+'use strict';
+
+var React = require('react');
+var Router = require('react-router');
+var Route = Router.Route;
+
+var App = require('./views/app.jsx');
+var Home = require('./views/home.jsx');
+var NewArticle = require('./articles/views/new_article.jsx');
+var Articles = require('./articles/views/article.jsx');
+var Login = require('./user/views/login.jsx');
+
+var routes = module.exports = (
+  React.createElement(Route, {path: "/", handler: App}, 
+      React.createElement(Router.DefaultRoute, {name: "home", handler: Home}), 
+      React.createElement(Route, {path: "/user/login", name: "login", handler: Login}), 
+      React.createElement(Route, {path: "/article", name: "article", handler: Articles}), 
+      React.createElement(Route, {path: "/article/new", name: "article-new", handler: NewArticle})
+  )
+);
+
+
+},{"./articles/views/article.jsx":2,"./articles/views/new_article.jsx":3,"./user/views/login.jsx":10,"./views/app.jsx":11,"./views/home.jsx":12,"react":213,"react-router":41}],10:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
  |  Copyright (C) 2015 PayPal                                                                                          |
  |                                                                                                                     |
@@ -263,31 +308,7 @@ module.exports = React.createClass({
 });
 
 
-},{"../../components/FacebookButton.jsx":4,"../../components/GoogleButton.jsx":5,"../../views/layout.jsx":13,"react":213}],10:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var Layout = require('../../views/layout.jsx');
-
-module.exports = React.createClass({
-
-  displayName: 'user',
-
-  render: function render(){
-    return (
-      React.createElement(Layout, React.__spread({},  this.props), 
-        React.createElement("div", null, 
-          React.createElement("h1", null, "This is the public home view"), 
-          React.createElement("p", null, React.createElement("a", {href: "/login"}, "Login")), 
-          React.createElement("p", null, React.createElement("a", {href: "/user/#"}, "User Home")), 
-          React.createElement("p", null, React.createElement("a", {href: "/article"}, "Articles Home"))
-        )
-      )
-    )
-  }
-});
-
-},{"../../views/layout.jsx":13,"react":213}],11:[function(require,module,exports){
+},{"../../components/FacebookButton.jsx":4,"../../components/GoogleButton.jsx":5,"../../views/layout.jsx":13,"react":213}],11:[function(require,module,exports){
 /*-------------------------------------------------------------------------------------------------------------------*\
 |  Copyright (C) 2015 PayPal                                                                                          |
 |                                                                                                                     |
@@ -23353,42 +23374,4 @@ module.exports = warning;
 },{"./emptyFunction":172,"JkpR2F":14}],213:[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":86}],214:[function(require,module,exports){
-/*-------------------------------------------------------------------------------------------------------------------*\
- |  Copyright (C) 2015 PayPal                                                                                          |
- |                                                                                                                     |
- |  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance     |
- |  with the License.                                                                                                  |
- |                                                                                                                     |
- |  You may obtain a copy of the License at                                                                            |
- |                                                                                                                     |
- |       http://www.apache.org/licenses/LICENSE-2.0                                                                    |
- |                                                                                                                     |
- |  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed   |
- |  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for  |
- |  the specific language governing permissions and limitations under the License.                                     |
- \*-------------------------------------------------------------------------------------------------------------------*/
-
-'use strict';
-
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-
-var App = require('../modules/views/app.jsx');
-var Home = require('../modules/views/home.jsx');
-var NewArticle = require('../modules/articles/views/new_article.jsx');
-var Articles = require('../modules/articles/views/article.jsx');
-var Login = require('../modules/user/views/login.jsx');
-
-var routes = module.exports = (
-  React.createElement(Route, {path: "/", handler: App}, 
-      React.createElement(Router.DefaultRoute, {name: "home", handler: Home}), 
-      React.createElement(Route, {path: "/user/login", name: "login", handler: Login}), 
-      React.createElement(Route, {path: "/article", name: "article", handler: Articles}), 
-      React.createElement(Route, {path: "/article/new", name: "article-new", handler: NewArticle})
-  )
-);
-
-
-},{"../modules/articles/views/article.jsx":2,"../modules/articles/views/new_article.jsx":3,"../modules/user/views/login.jsx":9,"../modules/views/app.jsx":11,"../modules/views/home.jsx":12,"react":213,"react-router":41}]},{},[8]);
+},{"./lib/React":86}]},{},[8]);
