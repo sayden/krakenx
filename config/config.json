@@ -20,11 +20,6 @@
   },
 
   "middleware": {
-    "static": {
-      "module": {
-        "arguments": ["path:./public"]
-      }
-    },
     "router": {
       "enabled":false,
       "module": {

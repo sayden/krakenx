@@ -16,7 +16,7 @@
 'use strict';
 
 var React = require('react');
-var NavBar = require('../components/NavBar.jsx');
+var NavBar = require('./NavBar.jsx');
 
 module.exports = React.createClass({
 

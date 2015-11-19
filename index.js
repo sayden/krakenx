@@ -66,7 +66,8 @@ app.on('middleware:after:session', function configPassport(eventargs) {
   //Init express router
   var Utils = require('./lib/utils');
   Utils.initRoutes(app);
-  //app.use(express.static('./modules'));
+  app.use(express.static('./modules'));
+  app.use(express.static('./public/components'));
 
 
   app.use(flash());

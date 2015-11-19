@@ -3,7 +3,7 @@
 var React = require('react');
 var Layout = require('./../../views/layout.jsx');
 var ListItem = require('./../components/ListItem.jsx');
-var TestButton = require('../../components/TestComponent.jsx');
+var TestButton = require('../../react-global-components/TestComponent.jsx');
 
 module.exports = React.createClass({
   render: function render(){

@@ -20,10 +20,21 @@ var Client = require('react-engine/lib/client');
 
 //Include all view files. Browerify doesn't do this automatically as it can
 //only operate on static require statements.
-require('./views/*.jsx', {glob: true});
-//require('./views/home.jsx');
-//require('./views/app.jsx');
-//require('./views/layout.jsx');
+//require('./views/*.jsx', {glob: true});
+
+//glob('**/*.jsx', function(err, files){
+//  if(err){
+//    console.error("Error trying to get glob paths", err);
+//  } else {
+//    files.forEach(function(file){
+//      console.log(file);
+//      //require(file);
+//    });
+//  }
+//});
+
+var bulk = require('bulk-require');
+bulk(__dirname, ['views/*.jsx', '**/views/*.jsx']);
 
 // boot options
 var options = {
@@ -33,8 +44,6 @@ var options = {
         return require('./' + viewName);
     }
 };
-
-//var document = typeof document === 'undefined' ? '' : document;
 
 if(typeof document === 'undefined'){
   console.log('FIXME: modules/main.js loading in server');

@@ -17,8 +17,8 @@
 
 var Layout = require('../../views/layout.jsx');
 var React = require('react');
-var GoogleButton = require('../../components/GoogleButton.jsx');
-var FacebookButton = require('../../components/FacebookButton.jsx');
+var GoogleButton = require('../../react-global-components/GoogleButton.jsx');
+var FacebookButton = require('../../react-global-components/FacebookButton.jsx');
 
 module.exports = React.createClass({
 

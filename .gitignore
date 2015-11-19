@@ -40,7 +40,6 @@ dist/
 # Bower and Browserify
 .build
 public/bundle.js
-modules/components
 modules/bower_components
 public/components
 modules/bundle.js
