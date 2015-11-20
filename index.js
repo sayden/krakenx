@@ -66,6 +66,8 @@ app.on('middleware:after:session', function configPassport(eventargs) {
   //Init express router
   var Utils = require('./lib/utils');
   Utils.initRoutes(app);
+
+  //Add static resources folders
   app.use(express.static('./modules'));
   app.use(express.static('./public/components'));
 
