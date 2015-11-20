@@ -15,7 +15,7 @@
 
 'use strict';
 
-var auth = require('../../../config/auth'),
+var auth = require('../../../lib/auth'),
     passport = require('passport');
 
 module.exports = function (router) {
