@@ -22,8 +22,6 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var app = module.exports = express();
 
-//var router = express.Router();
-
 // Main entrance point
 app.get('/', function (req, res) {
   res.render(req.url, {});
@@ -55,6 +53,9 @@ nodeJSX.install({
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
+app.on('middleware:after:router', function unloadEnrouten(app, config){
+  console.log(app, config);
+});
 
 app.on('middleware:after:session', function configPassport(eventargs) {
   //Setup passport

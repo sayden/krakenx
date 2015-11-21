@@ -1,0 +1,5 @@
+verbose: true
+instrumentation:
+    root: .
+    extensions: ['.js', '.jsx']
+    excludes: ['node_modules/', 'public', 'locales', 'tasks', 'test', 'modules/bundle.js']

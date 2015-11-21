@@ -1,0 +1,5 @@
+--compilers .:test/compiler.js
+--require test/dom-mocks.js
+--reporter spec
+--ui bdd
+--inline-diffs

@@ -2,25 +2,12 @@
 
 var should = require('chai').should(),
     mocha = require('mocha'),
-    Utils = require('../lib/utils');
+    Utils = require('../../lib/utils');
 
-describe.only('Utils library tests', function(){
-  it('should return path with views syncronically', getPathWithViews);
-  it('should return path with routes views syncronically', getPathRoutesSync);
+describe('Utils library tests', function(){
   it('should require every file in a path', requireInPath);
   it('should return path with views (glob)',getFilesInPath)
 });
-
-/**
- * Should return path with views syncronically
- */
-function getPathWithViews(){
-  var result =
-    Utils.getViewsPath(__dirname + '/../modules', '/views');
-  result.should.not.be.undefined;
-  result.should.not.be.null;
-  result.should.be.instanceOf(Array);
-}
 
 /**
  * should require every file in a path
@@ -36,21 +23,12 @@ function requireInPath(){
   routerStringified.should.contain('article');
 }
 
-/**
- * should return path with views syncronically
- */
-function getPathRoutesSync(){
-  var result = Utils.getViewsPath(__dirname + '/../modules', '/routes');
-  result.should.not.be.undefined;
-  result.should.not.be.null;
-  result.should.be.instanceOf(Array);
-}
 
 /**
  * should return path with views syncronically (glob)
  */
 function getFilesInPath(done){
-  Utils.getFilesInPath('modules/**/views/*.jsx',  function(result){
+  Utils.getFilesInPath('modules/**/views/*.jsx', function(result){
     result.should.not.be.undefined;
     result.should.not.be.null;
     result.should.be.instanceOf(Array);
