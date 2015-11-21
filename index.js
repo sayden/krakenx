@@ -53,10 +53,6 @@ nodeJSX.install({
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
-app.on('middleware:after:router', function unloadEnrouten(app, config){
-  console.log(app, config);
-});
-
 app.on('middleware:after:session', function configPassport(eventargs) {
   //Setup passport
   require('./config/credentials/google')(passport);

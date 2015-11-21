@@ -22,7 +22,7 @@ var Client = require('react-engine/lib/client');
 //only operate on static require statements.
 
 var bulk = require('bulk-require');
-console.log(bulk(__dirname, ['views/*.jsx', '**/views/*.jsx']));
+bulk(__dirname, ['views/*.jsx', '**/views/*.jsx']);
 
 // boot options
 var options = {

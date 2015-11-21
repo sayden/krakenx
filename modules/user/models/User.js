@@ -230,6 +230,12 @@ function injectUser() {
   };
 }
 
+UserSchema.statics.isLoggedIn = isLoggedIn;
+UserSchema.statics.injectUser = injectUser;
+
+var User = mongoose.model('User', UserSchema);
+
+module.exports = User;
 
 /**
  * Helper function to save or update a OAuth user profile
@@ -323,10 +329,3 @@ module.exports.saveOAuthUserProfile = function (req, providerUserProfile, done) 
     }
   }
 };
-
-UserSchema.statics.isLoggedIn = isLoggedIn;
-UserSchema.statics.injectUser = injectUser;
-
-var User = mongoose.model('User', UserSchema);
-
-module.exports = User;

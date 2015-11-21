@@ -8,7 +8,7 @@
     "test": "mocha test/**/**/*.jsx test/**/*.jsx",
     "browserify": "browserify -t reactify -t require-globify modules/main.js -o modules/bundle.js",
     "install-all": "npm install; bower install",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --compilers jsx:test/compiler.js test"
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --compilers jsx:test/compiler.js test/**/**/*.jsx test/**/*.jsx"
   },
   "dependencies": {
     "bootstrap": "~3.3.5",
