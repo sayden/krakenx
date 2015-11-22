@@ -40,6 +40,7 @@ module.exports = React.createClass({
                   {this.props.children}
                 <script src="/components/jquery/dist/jquery.min.js"></script>
                 <script src="/components/bootstrap/dist/js/bootstrap.js"></script>
+                <script src="/components/reflux/dist/reflux.js"></script>
                 <script src='/bundle.js'></script>
                 </body>
             </html>

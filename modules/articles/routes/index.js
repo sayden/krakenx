@@ -1,7 +1,7 @@
 'use strict';
 
 var auth = require('../../../lib/auth');
-var Article = require('../models/article');
+var Article = require('../models/ArticleMongoose');
 
 
 module.exports = function (router) {

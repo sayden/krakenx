@@ -36,9 +36,7 @@ var Article = mongoose.model('Article', ArticleSchema);
 module.exports = Article;
 
 
-/**
- * Create a article
- */
+
 module.exports.create = function (req, res) {
   var article = new Article(req.body);
   article.user = req.user;
@@ -54,16 +52,14 @@ module.exports.create = function (req, res) {
   });
 };
 
-/**
- * Show the current article
- */
+
+
 module.exports.read = function (req, res) {
   res.json(req.article);
 };
 
-/**
- * Update a article
- */
+
+
 module.exports.update = function (req, res) {
   var article = req.article;
 
@@ -81,9 +77,9 @@ module.exports.update = function (req, res) {
   });
 };
 
-/**
- * Delete an article
- */
+
+
+
 module.exports.delete = function (req, res) {
   var article = req.article;
 
@@ -98,9 +94,9 @@ module.exports.delete = function (req, res) {
   });
 };
 
-/**
- * List of Articles
- */
+
+
+
 module.exports.list = function (  req, res) {
   Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
     if (err) {
@@ -113,9 +109,9 @@ module.exports.list = function (  req, res) {
   });
 };
 
-/**
- * Article middleware
- */
+
+
+
 module.exports.articleByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {

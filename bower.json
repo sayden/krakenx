@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "bootstrap-social": "~4.10.1",
-    "bootstrap": "*"
+    "bootstrap": "*",
+    "reflux": "~0.3.0"
   }
 }

@@ -1,14 +1,19 @@
 'use strict';
 
 var React = require('react');
-var Layout = require('../../views/layout.jsx');
+var Reflux = require('reflux');
+var Store = require('../ArticlesStore.jsx');
+var Actions = require('../ArticlesActions.jsx');
 
 module.exports = React.createClass({
+  mixins: [Reflux.connect(Store, 'ArticlesStore')],
 
   displayName: 'new-article',
 
   OnClick: function OnClick(){
     alert("Tested");
+    console.log("Tested");
+    Actions.addArticle({res:"Something"});
     console.log("Tested");
   },
 
