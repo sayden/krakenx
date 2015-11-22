@@ -1,6 +1,7 @@
 'use strict';
 
 var auth = require('../../../lib/auth');
+var Article = require('../models/article');
 
 
 module.exports = function (router) {
@@ -13,18 +14,11 @@ module.exports = function (router) {
     res.render('/article/new', {});
   });
 
-  router.get('/api/article', auth.isAuthenticated(), function (req, res) {
-    res.json([
-      {
-        title:'A title',
-        desc: 'A Desc',
-        created: 'A Date'
-      },
-      {
-        title:'A title',
-        desc: 'A Desc',
-        created: 'A Date'
-      }
-    ]);
-  });
+  router.get('/api/article', auth.isAuthenticated(), Article.list);
+  router.post('/api/article', auth.isAuthenticated(), Article.create);
+
+  router.get('/api/article/:articleId', auth.isAuthenticated(), Article.articleByID);
+  router.put('/api/article/:articleId', auth.isAuthenticated(), Article.update);
+  router.delete('/api/article/articleId', auth.isAuthenticated(), Article.delete);
+
 };
