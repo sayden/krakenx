@@ -51,7 +51,7 @@ nodeJSX.install({
 
 // Setup Mongo
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/krakenx');
 
 app.on('middleware:after:session', function configPassport(eventargs) {
   //Setup passport
@@ -78,4 +78,3 @@ app.on('start', function () {
     console.log('Application ready to serve requests.');
     console.log('Environment: %s', app.kraken.get('env:env'));
 });
-

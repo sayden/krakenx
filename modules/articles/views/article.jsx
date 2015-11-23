@@ -6,8 +6,25 @@ var ListItem = require('../components/ListItem.jsx');
 var ArticleList = require('../components/ArticleList.jsx');
 var TestButton = require('../../react-global-components/TestComponent.jsx');
 
+var Store = require('../ArticlesStore.jsx');
+var Actions = require('../ArticlesActions.jsx');
+var Reflux = require('reflux');
+
 module.exports = React.createClass({
+  mixins:[Reflux.connect(Store, 'articles')],
+
+  displayName: 'articleList',
+
   render: function render(){
+    var articleList;
+    if(this.state.articles){
+      articleList = this.state.articles.map(function(article){
+        <ListItem article={article} />
+      });
+    } else {
+      articleList = <div>Loading articles</div>;
+    }
+
     return (
       <Layout {...this.props}>
         <h1>This is the article list view</h1>
@@ -17,9 +34,7 @@ module.exports = React.createClass({
         <p><a href="/article">Articles Home</a></p>
         <p><a href="/article/new">New Article view</a></p>
         <div>
-          <ListItem article={ {title:"Test", id:1} } />
-          <ListItem article={ {title:"Test2", id:2} } />
-          <ListItem article={ {title:"Test3", id:3} } />
+          {articleList}
         </div>
       </Layout>
     )

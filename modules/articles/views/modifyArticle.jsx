@@ -13,12 +13,16 @@ module.exports = React.createClass({
   OnClick: function OnClick(){
     var title = this.refs.title;
     var content = this.refs.content;
-
-    Actions.addArticle({title:title, content:content});
+    console.log(title, content);
+    Actions.addArticle({title:"Something", content:"content"});
   },
 
   render: function render(){
-    
+    if(this.state.articles){
+      console.log(this.state.articles);
+    } else {
+      console.log('No articles');
+    }
     return (
       <div>
         <h1>New Article</h1>
