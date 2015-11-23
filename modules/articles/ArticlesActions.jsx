@@ -1,8 +1,10 @@
 var Reflux = require('reflux');
 
-module.exports = Reflux.createActions(['' +
+var Actions = Reflux.createActions([
   'addArticle',
   'updateArticle',
   'deleteArticle',
   'listArticles'
 ]);
+
+module.exports = Actions;

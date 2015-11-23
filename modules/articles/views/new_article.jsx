@@ -6,18 +6,20 @@ var Store = require('../ArticlesStore.jsx');
 var Actions = require('../ArticlesActions.jsx');
 
 module.exports = React.createClass({
-  mixins: [Reflux.connect(Store, 'ArticlesStore')],
+  mixins: [ Reflux.connect(Store, 'articles') ],
 
   displayName: 'new-article',
 
   OnClick: function OnClick(){
-    alert("Tested");
-    console.log("Tested");
-    Actions.addArticle({res:"Something"});
-    console.log("Tested");
+    Actions.addArticle({title:"Something", content:"content"});
   },
 
   render: function render(){
+    if(this.state.articles){
+      console.log(this.state.articles);
+    } else {
+      console.log('No articles');
+    }
     return (
       <div>
         <h1>New Article</h1>

@@ -2,7 +2,8 @@
 
 var React = require('react');
 var Layout = require('./../../views/layout.jsx');
-var ListItem = require('./../components/ListItem.jsx');
+var ListItem = require('../components/ListItem.jsx');
+var ArticleList = require('../components/ArticleList.jsx');
 var TestButton = require('../../react-global-components/TestComponent.jsx');
 
 module.exports = React.createClass({
@@ -11,7 +12,7 @@ module.exports = React.createClass({
       <Layout {...this.props}>
         <h1>This is the article list view</h1>
         <TestButton />
-        <p><a href="/login">Login</a></p>
+        <p><a href="/user/login">Login</a></p>
         <p><a href="/user/home">User Home</a></p>
         <p><a href="/article">Articles Home</a></p>
         <p><a href="/article/new">New Article view</a></p>
