@@ -23,6 +23,7 @@ var App = require('./views/app.jsx');
 var Home = require('./views/home.jsx');
 var NewArticle = require('./articles/views/new_article.jsx');
 var Articles = require('./articles/views/article.jsx');
+var ArticleDetail = require('./articles/views/articleDetail.jsx');
 var Login = require('./user/views/login.jsx');
 
 var routes = module.exports = (
@@ -31,5 +32,6 @@ var routes = module.exports = (
       <Route path='/user/login' name='login' handler={Login} />
       <Route path='/article' name='article' handler={Articles} />
       <Route path='/article/new' name='article-new' handler={NewArticle} />
+      <Route path='/article/:id' name='article-detail' handler={ArticleDetail} />
   </Route>
 );

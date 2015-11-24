@@ -4,7 +4,8 @@ var Actions = Reflux.createActions([
   'addArticle',
   'updateArticle',
   'deleteArticle',
-  'listArticles'
+  'listArticles',
+  'getArticle'
 ]);
 
 module.exports = Actions;

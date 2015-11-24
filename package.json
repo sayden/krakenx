@@ -11,8 +11,6 @@
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --compilers jsx:test/compiler.js test/**/**/*.jsx test/**/*.jsx"
   },
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "bootstrap-social": "~4.9.1",
     "connect-flash": "~0.1.1",
     "crypto": "0.0.3",
     "deasync": "~0.1.4",
@@ -32,6 +30,7 @@
     "passport-google": "~0.3.0",
     "passport-google-oauth": "~0.2.0",
     "passport-oauth": "~1.0.0",
+    "qwest": "^2.2.3",
     "react": "0.13.3",
     "react-engine": "^2.0.0",
     "react-router": "^0.13.3",
@@ -53,8 +52,6 @@
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-copy-to": "0.0.10",
-    "grunt-localizr": "^0.1.4",
     "grunt-mocha-cli": "^1.13.0",
     "grunt-node-inspector": "~0.4.1",
     "grunt-nodemon": "~0.4.0",

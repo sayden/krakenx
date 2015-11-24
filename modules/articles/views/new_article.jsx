@@ -11,8 +11,8 @@ module.exports = React.createClass({
   displayName: 'new-article',
 
   OnClick: function OnClick(){
-    var title = this.refs.title;
-    var content = this.refs.content;
+    var title = this.refs.title.getDOMNode().value;
+    var content = this.refs.content.getDOMNode().value;
 
     Actions.addArticle({title:title, content:content});
   },
@@ -22,8 +22,7 @@ module.exports = React.createClass({
     return (
       <div>
         <h1>New Article</h1>
-        <button onClick={this.OnClick}>Test</button>
-        <form className="col-sm-8">
+        <form className="col-sm-8" action="/article">
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input type="text" className="form-control" id="title" ref="title" placeholder="title" />
@@ -32,7 +31,7 @@ module.exports = React.createClass({
             <label htmlFor="textarea">Article body</label>
             <textarea className="form-control" ref="content" rows="3"></textarea>
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary" onClick={this.OnClick}>Submit</button>
         </form>
         <div className="col-md-12">
           <h4>Links</h4>

@@ -44,7 +44,7 @@ module.exports.create = function (req, res) {
   article.save(function (err) {
     if (err) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+        message: 'Error when creating item'
       });
     } else {
       res.json(article);
@@ -69,7 +69,7 @@ module.exports.update = function (req, res) {
   article.save(function (err) {
     if (err) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+        message: 'Error when updating'
       });
     } else {
       res.json(article);
@@ -86,7 +86,7 @@ module.exports.delete = function (req, res) {
   article.remove(function (err) {
     if (err) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+        message: 'Error when deleting'
       });
     } else {
       res.json(article);
@@ -101,7 +101,7 @@ module.exports.list = function (  req, res) {
   Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
     if (err) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+        message: 'Error retrieving item list'
       });
     } else {
       res.json(articles);
@@ -113,7 +113,6 @@ module.exports.list = function (  req, res) {
 
 
 module.exports.articleByID = function (req, res, next, id) {
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Article is invalid'

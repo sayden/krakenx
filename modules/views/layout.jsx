@@ -37,10 +37,11 @@ module.exports = React.createClass({
                   <NavBar />
                 </head>
                 <body>
-                  {this.props.children}
+                  <div className="col-md-10 col-md-offset-1">
+                    {this.props.children}
+                  </div>
                 <script src="/components/jquery/dist/jquery.min.js"></script>
                 <script src="/components/bootstrap/dist/js/bootstrap.js"></script>
-                <script src="/components/reflux/dist/reflux.js"></script>
                 <script src="/components/qwest/qwest.min.js"></script>
                 <script src='/bundle.js'></script>
                 </body>

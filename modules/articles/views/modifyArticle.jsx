@@ -8,13 +8,13 @@ var Actions = require('../ArticlesActions.jsx');
 module.exports = React.createClass({
   mixins: [ Reflux.connect(Store, 'articles') ],
 
-  displayName: 'new-article',
+  displayName: 'update-article',
 
   OnClick: function OnClick(){
     var title = this.refs.title;
     var content = this.refs.content;
     console.log(title, content);
-    Actions.addArticle({title:"Something", content:"content"});
+    Actions.updateArticle({title:"Something", content:"content"});
   },
 
   render: function render(){
@@ -25,7 +25,7 @@ module.exports = React.createClass({
     }
     return (
       <div>
-        <h1>New Article</h1>
+        <h1>Update Article</h1>
         <button onClick={this.OnClick}>Test</button>
         <form className="col-sm-8">
           <div className="form-group">

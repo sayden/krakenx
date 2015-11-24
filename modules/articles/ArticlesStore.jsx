@@ -6,17 +6,24 @@ var _articles = [];
 var Store = Reflux.createStore({
   listenables:[ArticleActions],
 
-  init: function(){
-    this.listArticles()
-  },
-
   addArticle: function(article){
     qwest.post('http://localhost:8000/api/article', article)
       .then(function(xhr, data){
-          console.log('Article added');
           _articles.push(data);
           Store.trigger(_articles);
       });
+  },
+
+  getArticle: function(id){
+    var url = 'http://localhost:8000/api/article/' + id;
+    qwest.get(url)
+      .then(function(xhr, data){
+        _articles = [data];
+        this.trigger(data);
+      }).catch(function(xhr, data, err){
+        console.error('Error trying to get article', err);
+        console.info(xhr, data);
+      })
   },
 
   deleteArticle: function(id){
@@ -34,9 +41,12 @@ var Store = Reflux.createStore({
   },
 
   listArticles: function(){
-    qwest.get('http://localhost:8000/api/article', function(xhr, data){
-      _articles.concat(data);
+    qwest.get('http://localhost:8000/api/article')
+    .then(function(xhr, data){
+      _articles = _articles.concat(data);
       Store.trigger(_articles);
+    }).catch(function(xhr, data, err){
+      console.error('Failing when retrieving list of articles', xhr, data, err);
     });
   }
 });
