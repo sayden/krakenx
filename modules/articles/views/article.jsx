@@ -16,7 +16,6 @@ module.exports = React.createClass({
   displayName: 'articleList',
 
   componentDidMount: function(){
-    console.log(this.props);
     Actions.listArticles();
   },
 

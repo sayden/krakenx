@@ -109,10 +109,14 @@ module.exports.list = function (  req, res) {
   });
 };
 
+module.exports.read = function (req, res) {
+  res.json(req.article);
+};
 
 
+module.exports.articleByID = function (req, res, next) {
+  var id = req.params.id;
 
-module.exports.articleByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Article is invalid'
@@ -121,9 +125,11 @@ module.exports.articleByID = function (req, res, next, id) {
 
   Article.findById(id).populate('user', 'displayName')
     .exec(function (err, article) {
-    if (err) {
+      if (err) {
+      console.error(err);
       return next(err);
     } else if (!article) {
+      console.error('No article with that identifier has been found');
       return res.status(404).send({
         message: 'No article with that identifier has been found'
       });

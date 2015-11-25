@@ -2,27 +2,36 @@
 
 var auth = require('../../../lib/auth');
 var Article = require('../models/ArticleMongoose');
+var express = require('express');
 
+module.exports = function (app) {
 
-module.exports = function (router) {
-
-  router.get('/article', auth.isAuthenticated(), function (req, res) {
+  app.get('/article', auth.isAuthenticated(), function (req, res) {
     res.render('articles/views/article', {});
   });
 
-  router.get('/article/new', auth.isAuthenticated(), function(req, res){
+  app.get('/article/new', auth.isAuthenticated(), function(req, res){
     res.render('/article/new', {});
   });
 
-  router.get('/article/:id', auth.isAuthenticated(), function(req, res){
+  app.get('/article/:id', auth.isAuthenticated(), function(req, res){
     res.render('/article/:id', {});
   });
 
-  router.get('/api/article/:id', Article.articleByID);
-  router.get('/api/article', auth.isAuthenticated(), Article.list);
-  router.post('/api/article', auth.isAuthenticated(), Article.create);
+  var apiRouter = express.Router();
 
-  router.put('/api/article/:articleId', auth.isAuthenticated(), Article.update);
-  router.delete('/api/article/:articleId', auth.isAuthenticated(), Article.delete);
+  apiRouter.param('id', Article.articleByID);
 
+  apiRouter.route('/:id')
+    .all(auth.isAuthenticated())
+    .get(Article.read)
+    .put(Article.update)
+    .delete(Article.delete);
+
+  apiRouter.route('/')
+    .all(auth.isAuthenticated())
+    .get(Article.list)
+    .post(Article.create);
+
+  app.use('/api/article', apiRouter);
 };

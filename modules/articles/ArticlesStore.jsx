@@ -15,14 +15,12 @@ var Store = Reflux.createStore({
   },
 
   getArticle: function(id){
-    var url = 'http://localhost:8000/api/article/' + id;
-    qwest.get(url)
+    qwest.get('http://localhost:8000/api/article/' + id)
       .then(function(xhr, data){
         _articles = [data];
-        this.trigger(data);
+        Store.trigger(data);
       }).catch(function(xhr, data, err){
         console.error('Error trying to get article', err);
-        console.info(xhr, data);
       })
   },
 

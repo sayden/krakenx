@@ -21,15 +21,18 @@ module.exports = React.createClass({
   render: function render(){
     var article;
     if(this.state.article){
-      console.log(this.state.article);
+      article =
+        <div>
+          <h1>{this.state.article.title}</h1>
+          <p>{this.state.article.content}</p>
+        </div>;
     } else {
       article = <div>Loading article</div>;
     }
 
     return (
       <div>
-        <h1>This is the article detail view</h1>
-        <TestButton />
+        <h3>Article view</h3>
         <p><a href="/user/home">User Home</a></p>
         <p><a href="/article">Articles Home</a></p>
         <p><a href="/article/new">New Article view</a></p>
