@@ -1,30 +1,37 @@
 'use strict';
 
 var auth = require('../../../lib/auth');
+var Article = require('../models/ArticleMongoose');
+var express = require('express');
 
+module.exports = function (app) {
 
-module.exports = function (router) {
-
-  router.get('/article', auth.isAuthenticated(), function (req, res) {
+  app.get('/article', auth.isAuthenticated(), function (req, res) {
     res.render('articles/views/article', {});
   });
 
-  router.get('/article/new', auth.isAuthenticated(), function(req, res){
+  app.get('/article/new', auth.isAuthenticated(), function(req, res){
     res.render('/article/new', {});
   });
 
-  router.get('/api/article', auth.isAuthenticated(), function (req, res) {
-    res.json([
-      {
-        title:'A title',
-        desc: 'A Desc',
-        created: 'A Date'
-      },
-      {
-        title:'A title',
-        desc: 'A Desc',
-        created: 'A Date'
-      }
-    ]);
+  app.get('/article/:id', auth.isAuthenticated(), function(req, res){
+    res.render('/article/:id', {});
   });
+
+  var apiRouter = express.Router();
+
+  apiRouter.param('id', Article.articleByID);
+
+  apiRouter.route('/:id')
+    .all(auth.isAuthenticated())
+    .get(Article.read)
+    .put(Article.update)
+    .delete(Article.delete);
+
+  apiRouter.route('/')
+    .all(auth.isAuthenticated())
+    .get(Article.list)
+    .post(Article.create);
+
+  app.use('/api/article', apiRouter);
 };
