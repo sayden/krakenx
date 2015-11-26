@@ -20,6 +20,8 @@
   ],
   "dependencies": {
     "bootstrap-social": "~4.10.1",
-    "bootstrap": "*"
+    "bootstrap": "*",
+    "reflux": "~0.3.0",
+    "qwest": "~2.2.3"
   }
 }
