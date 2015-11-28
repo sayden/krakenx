@@ -21,7 +21,7 @@ var auth = require('../../../lib/auth'),
 module.exports = function (router) {
 
   router.get('/user', auth.isAuthenticated(), function(req, res){
-    res.render('user/views/user', {});
+    res.render('user/views/index', {});
   });
 
   // route for logging out

@@ -7,7 +7,7 @@ var express = require('express');
 module.exports = function (app) {
 
   app.get('/article', auth.isAuthenticated(), function (req, res) {
-    res.render('articles/views/article', {});
+    res.render('article/views/index', {});
   });
 
   app.get('/article/new', auth.isAuthenticated(), function(req, res){

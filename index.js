@@ -21,10 +21,21 @@ var nodeJSX = require('node-jsx');
 var passport = require('passport');
 var flash = require('connect-flash');
 var app = module.exports = express();
+var glob = require('glob');
 
 // Main entrance point
 app.get('/', function (req, res) {
-  res.render(req.url, {});
+
+  var rawRoutes = glob.sync(__dirname + '/modules/**/views/index.jsx');
+  //take only the module name
+  var routes = rawRoutes.map(function(route){
+    var searchStrings = ['/modules/', '/views/index.jsx'];
+    return route.substring(
+      route.indexOf(searchStrings[0]) + searchStrings[0].length,
+      route.indexOf(searchStrings[1]));
+  });
+
+  res.render(req.url, {routes: routes});
 });
 
 var options;

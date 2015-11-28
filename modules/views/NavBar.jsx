@@ -1,9 +1,18 @@
 'use strict';
 
 var React = require('react');
+var glob = require('glob');
+var Util = require('../../lib/utils');
 
 module.exports = React.createClass({
   render: function render(){
+    var routes = [];
+    if(this.props.routes !== undefined){
+      routes = this.props.routes.map(function(route){
+        return <li><a href={'/' + route} key={route}>{Util.capitalizeFirstLetter(route)}</a></li>
+      });
+    }
+
     return(
       <div>
         <nav className="navbar navbar-default">
@@ -21,7 +30,7 @@ module.exports = React.createClass({
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
                 <li><a href="/">Home <span className="sr-only">(current)</span></a></li>
-                <li><a href="/user/login">Login</a></li>
+                {routes}
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li className="dropdown">

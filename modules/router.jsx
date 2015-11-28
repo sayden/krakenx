@@ -21,9 +21,9 @@ var Route = Router.Route;
 
 var App = require('./views/app.jsx');
 var Home = require('./views/home.jsx');
-var NewArticle = require('./articles/views/new_article.jsx');
-var Articles = require('./articles/views/article.jsx');
-var ArticleDetail = require('./articles/views/articleDetail.jsx');
+var NewArticle = require('./article/views/new_article.jsx');
+var Articles = require('./article/views/index.jsx');
+var ArticleDetail = require('./article/views/articleDetail.jsx');
 var Login = require('./user/views/login.jsx');
 
 var routes = module.exports = (

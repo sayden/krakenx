@@ -11,8 +11,7 @@ module.exports = React.createClass({
     return (
       <Layout {...this.props}>
         <div>
-          <h1>This is the public home view</h1>
-          <p><a href="/user/login">Login</a></p>
+          <h1>This is the user home view</h1>
           <p><a href="/user/#">User Home</a></p>
           <p><a href="/article">Articles Home</a></p>
           <p><a href="/article/new">New Articles Home</a></p>
