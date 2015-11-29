@@ -7,11 +7,11 @@ var kraken = require('kraken-js'),
   chai = require('chai'),
   should = chai.should(),
   React = require('react/addons'),
-  jsdom = require('mocha-jsdom');
+  jsdom = require('mocha-jsdom'),
+  ListItem = require('../../../modules/article/components/ListItem.jsx');
 
 describe('ListItem TESTS', function() {
   it('should contain text "title" in title prop', function () {
-    var ListItem = require('../../../modules/articles/components/ListItem.jsx');
     var TestUtils = React.addons.TestUtils;
 
     var articleJson = {title: "title1", id: 1};

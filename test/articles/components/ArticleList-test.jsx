@@ -4,11 +4,11 @@
 
 var chai = require('chai'),
     should = chai.should(),
-    React = require('react/addons');
+    React = require('react/addons'),
+    ArticleList = require('../../../modules/article/components/ArticleList.jsx');
 
 describe('ArticleList TEST', function(){
   it('should contain the 2 h4 "title1" and "title2" tags', function(){
-    var ArticleList = require('../../../modules/articles/components/ArticleList.jsx');
     var TestUtils = React.addons.TestUtils;
 
     var articles = [
