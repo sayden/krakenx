@@ -22,21 +22,19 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var app = module.exports = express();
 var glob = require('glob');
+var Utils = require('./lib/utils');
+
+
+//Inject modules names to fill nav bar routes.
+//By default article and user
+app.use(Utils.injectModulesNames());
+
 
 // Main entrance point
 app.get('/', function (req, res) {
-
-  var rawRoutes = glob.sync(__dirname + '/modules/**/views/index.jsx');
-  //take only the module name
-  var routes = rawRoutes.map(function(route){
-    var searchStrings = ['/modules/', '/views/index.jsx'];
-    return route.substring(
-      route.indexOf(searchStrings[0]) + searchStrings[0].length,
-      route.indexOf(searchStrings[1]));
-  });
-
-  res.render(req.url, {routes: routes});
+  res.render(req.url, {});
 });
+
 
 var options;
 
@@ -78,7 +76,6 @@ app.on('middleware:after:session', function configPassport(eventargs) {
   //Add static resources folders
   app.use(express.static('./modules'));
   app.use(express.static('./public/components'));
-
 
   app.use(flash());
 });
