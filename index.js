@@ -16,25 +16,34 @@
 'use strict';
 
 var express = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var kraken = require('kraken-js');
 var nodeJSX = require('node-jsx');
 var passport = require('passport');
 var flash = require('connect-flash');
-var app = module.exports = express();
 var glob = require('glob');
 var Utils = require('./lib/utils');
+var User = require('./modules/user/models/User');
 
+var app = module.exports = express();
 
 //Inject modules names to fill nav bar routes.
 //By default article and user
 app.use(Utils.injectModulesNames());
 
+//Inject user on each request
+app.use(User.injectUser());
 
 // Main entrance point
 app.get('/', function (req, res) {
   res.render(req.url, {});
 });
 
+
+//Add static resources folders
+app.use(express.static('./modules'));
+app.use(express.static('./public/components'));
 
 var options;
 
@@ -62,7 +71,9 @@ nodeJSX.install({
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/krakenx');
 
+
 app.on('middleware:after:session', function configPassport(eventargs) {
+
   //Setup passport
   require('./config/credentials/google')(passport);
   require('./config/credentials/facebook')(passport);
@@ -73,14 +84,12 @@ app.on('middleware:after:session', function configPassport(eventargs) {
   var Utils = require('./lib/utils');
   Utils.initRoutes(app);
 
-  //Add static resources folders
-  app.use(express.static('./modules'));
-  app.use(express.static('./public/components'));
 
   app.use(flash());
 });
 
 app.use(kraken(options));
+
 
 app.on('start', function () {
     console.log('Application ready to serve requests.');

@@ -237,10 +237,13 @@ var User = mongoose.model('User', UserSchema);
 
 module.exports = User;
 
+module.exports.injectUser = injectUser;
+
 /**
  * Helper function to save or update a OAuth user profile
  */
 module.exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
+  console.log(req.user);
   if (!req.user) {
     // Define a search query fields
     var searchMainProviderIdentifierField = 'providerData.' +

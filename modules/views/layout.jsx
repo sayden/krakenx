@@ -20,24 +20,6 @@ var NavBar = require('./NavBar.jsx');
 var glob = require('glob');
 
 module.exports = React.createClass({
-
-  /* Iterates over modules to get the names of each of them and make routes
-   * in NavBar to each index.jsx file */
-  getModulesRoutes: function getModulesRoutes(){
-    //We only want this function to be executed in server
-    if(typeof document === 'undefined'){
-      var res = glob.sync(__dirname + '/../**/views/index.jsx');
-
-      //take only the module name
-      return res.map(function(route){
-        var searchStrings = ['/modules/', '/views/index.jsx'];
-        return route.substring(
-          route.indexOf(searchStrings[0]) + searchStrings[0].length,
-          route.indexOf(searchStrings[1]));
-      });
-    }
-  },
-
   render: function render() {
 
     return (

@@ -5,9 +5,9 @@
   "author": "Mario Castro",
   "main": "index.js",
   "scripts": {
-    "start": "npm run browserify; node server.js",
+    "start": "npm run build; node server.js",
     "test": "mocha test/**/**/*.jsx test/**/*.jsx",
-    "browserify": "browserify -t reactify -t require-globify -t bulkify modules/main.js -o modules/bundle.js",
+    "build": "browserify -t reactify -t require-globify -t bulkify modules/main.js -o modules/bundle.js",
     "install-all": "npm install; bower install",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --compilers jsx:test/compiler.js test/**/**/*.jsx test/**/*.jsx"
   },
@@ -17,6 +17,7 @@
     "deasync": "~0.1.4",
     "engine-munger": "^0.2.0",
     "express": "^4.3.0",
+    "express-session": "^1.12.1",
     "font-awesome": "~4.4.0",
     "generate-password": "~1.1.1",
     "glob": "^6.0.1",
@@ -36,7 +37,6 @@
     "react-engine": "^2.0.0",
     "react-router": "^0.13.3",
     "react-tools": "~0.13.3",
-    "redux": "^3.0.4",
     "reflux": "^0.3.0",
     "validator": "~4.2.1"
   },
